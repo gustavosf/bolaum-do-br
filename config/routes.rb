@@ -1,4 +1,14 @@
 Bolao::Application.routes.draw do
+
+  root :to => 'apostas#index'
+
+  resources :sessions, :only => [:new, :create, :destroy]
+  controller :sessions do 
+    get 'login' => :new
+    post 'login' => :create
+    get 'logout' => :destroy
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
