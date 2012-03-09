@@ -48,7 +48,7 @@ games.each do |game| # here, game is an array, not an object (no keys indeed)
   Game.create(
     :id            => game['jogo_id'],
     :round         => game['rodada'],
-    :date          => game['data-original'],
+    :date          => game['data_original'],
     :stadium_id    => game['sede'],
     :home_id       => game['equipe_mandante'],
     :visitor_id    => game['equipe_visitante'],
