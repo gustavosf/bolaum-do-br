@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20120309165602) do
     t.datetime "updated_at"
   end
 
-  create_table "stadiuns", :force => true do |t|
+  create_table "stadiums", :force => true do |t|
     t.integer  "max_capaticy"
     t.string   "inauguration"
     t.string   "location"
