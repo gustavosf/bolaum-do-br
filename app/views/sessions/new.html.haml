@@ -1,13 +1,14 @@
-%h1 Log in
-  
-- form_tag sessions_path do
-  %div.field
-    = label_tag :email
-    = text_field_tag :email, params[:email]
-
-  %div.field
-    = label_tag :password
-    = password_field_tag :password
-
-  %div.actions
-  	= submit_tag "Log in"
+= form_tag sessions_path, :class => 'form-horizontal span6 offset3' do
+  %fieldset
+    %center
+      %legend Identifique-se
+    = hidden_field_tag :email
+    
+    %center
+      #users-container
+        - @users.each do |u|
+          %img.user{:src => u.photo, :width => '150px', :onclick => "select_user(#{u.id}, this)"}
+    
+      #password-container
+        = password_field_tag :password, nil, :class => 'input-xlarge', :placeholder => 'senha'
+        = submit_tag "Log in", :class => 'btn btn-primary'
