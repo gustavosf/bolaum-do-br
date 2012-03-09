@@ -1,4 +1,4 @@
-class Games < ActiveRecord::Base
+class Game < ActiveRecord::Base
 
   has_many :bets
   has_one  :stadium
