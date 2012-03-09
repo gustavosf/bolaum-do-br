@@ -33,4 +33,8 @@ group :test do
   gem 'turn', :require => false
 end
 
+group :development, :test do
+  gem 'ruby-debug19', :require => 'ruby-debug'
+end
+
 gem 'haml'

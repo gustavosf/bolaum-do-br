@@ -3,6 +3,7 @@
 		do (sibling) ->
 			$(sibling).hide()
 
-	$('#email').val user
+	console.log user
+	$('#user_id').val user
 	$('#password-container').show()
 	$('#password').focus()

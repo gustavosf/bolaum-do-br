@@ -6,10 +6,10 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by_email(params[:email])
+    user = User.find(params[:user_id])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      user.last_login = Time.now
+      user.last_access = Time.now
       user.save
       
       redirect_to root_url, :notice => "Você foi identificado"
