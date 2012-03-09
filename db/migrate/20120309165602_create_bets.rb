@@ -1,11 +1,11 @@
 class CreateBets < ActiveRecord::Migration
   def change
     create_table :bets do |t|
-      t.int :game_id
-      t.id :user_id
-      t.int :home_score
-      t.int :visitor_score
-      t.int :points
+      t.integer :game_id
+      t.integer :user_id
+      t.integer :home_score
+      t.integer :visitor_score
+      t.integer :points
 
       t.timestamps
     end

@@ -1,7 +1,7 @@
 class CreateStadiuns < ActiveRecord::Migration
   def change
     create_table :stadiuns do |t|
-      t.int :max_capaticy
+      t.integer :max_capaticy
       t.string :inauguration
       t.string :location
       t.string :name
