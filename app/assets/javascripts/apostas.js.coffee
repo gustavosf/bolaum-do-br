@@ -7,4 +7,4 @@ $(document).ready ->
     return if $(event.target).parent().hasClass 'active'
     link = $(event.target).attr 'data-content'
     console.log link
-    $.get '/' + link, (data) ->  $('#pane').html data
+    $.post '/' + link, (data) ->  $('#pane').html data

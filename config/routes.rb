@@ -3,7 +3,7 @@ Bolao::Application.routes.draw do
   root :to => 'apostas#index'
 
   controller :apostas do
-    get 'rodada' => :rodada
+    post 'rodada' => :rodada
   end
 
   resources :sessions, :only => [:new, :create, :destroy]
