@@ -1,8 +1,19 @@
 class Game < ActiveRecord::Base
 
   has_many :bets
-  has_one  :stadium
-  has_one  :home, :class_name => 'Clubs'
-  has_one  :visitor, :class_name => 'Clubs'
+  belongs_to :stadium
+  belongs_to :home, :class_name => 'Club'
+  belongs_to :visitor, :class_name => 'Club'
+
+  def self.actual_round
+    date = Game.find(
+      :first,
+      :conditions => ["date > ?", Time.now],
+      :group => 'date',
+      :having => 'count(*) > 1',
+      :select => 'date',
+      :order => 'date ASC').date
+    Game.find(:first, :conditions => ["date = ?", date]).round
+  end
 
 end
