@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  nick: MyString
+  logo: MyString
+  name: MyString
+  popular_name: MyString
+  acronym: MyString
+  slug: MyString
+
+two:
+  nick: MyString
+  logo: MyString
+  name: MyString
+  popular_name: MyString
+  acronym: MyString
+  slug: MyString
