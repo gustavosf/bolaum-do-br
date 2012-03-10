@@ -5,8 +5,13 @@ class ApostasController < ApplicationController
   end
 
   def rodada
-    @user = current_user
+    @games = Game.find_all_by_round Game.actual_round
+
     render 'rodada', :layout => false
+  end
+
+  def bet
+    render :nothing => true
   end
 
 end

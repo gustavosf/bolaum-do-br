@@ -5,3 +5,20 @@
  *= require_self
  *= require_tree . 
 */
+
+div.ajax-loader {
+	text-align: center;
+	padding:20px;
+}
+
+#notification-area {
+  position: fixed;
+  left: 50%; margin-left: -200px;
+  z-index: 1050;
+  width: 400px;
+  overflow: auto;
+}
+#notification-area > .alert {
+  margin-bottom: 5px;
+  cursor: pointer;
+}

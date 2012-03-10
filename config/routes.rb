@@ -4,6 +4,7 @@ Bolao::Application.routes.draw do
 
   controller :apostas do
     post 'rodada' => :rodada
+    post 'bet' => :bet
   end
 
   resources :sessions, :only => [:new, :create, :destroy]
