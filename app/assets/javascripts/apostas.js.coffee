@@ -11,11 +11,21 @@ $(document).ready ->
 
   $.post '/rodada', (data) ->
     $('#rodada').html data
-    $('#rodada input').keyup ->
+    $('#rodada input').keypress ->
+      value = String.fromCharCode(event.which)
+      return false if !isNumber(value) 
+      $(event.target).val(value)
+
       game = $(event.target).parents('.jogo')
       game_id = game.attr('ref')
-      score = game.find('input')
-      score = [score[0].value, score[1].value]
+      score_board = game.find('input')
+      score = [score_board[0].value, score_board[1].value]
       if isNumber(score[0]) and isNumber(score[1])
-        game = 
-        $.post '/bet', {'bet': score, 'game_id': game_id}, -> new Notification().success('Jogo Salvo')
+        req = $.post '/bet.json', {'bet': score, 'game_id': game_id}, (data) ->
+          if data.error? 
+            new Notification().error(data.message)
+            score_board[0].value = data.score[0]
+            score_board[1].value = data.score[1]
+          else
+            new Notification().success(data.message)
+        'json'

@@ -1,8 +1,8 @@
 - @games.each do |game|
   .row.jogo{:ref => "#{game.id}"}
-    = bet = game.bets.find_by_user_id current_user.id
+    - bet = game.bets.find_by_user_id current_user.id
     .span3.info
-      = game.date.strftime "%d/%m %H/%M" + ' - '
+      = game.date.strftime "%d/%m %H:%M" + ' - '
       = game.stadium ? game.stadium.popular_name : 'A definir'
     .row
       .span3.placar

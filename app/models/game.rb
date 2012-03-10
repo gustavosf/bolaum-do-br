@@ -16,4 +16,12 @@ class Game < ActiveRecord::Base
     Game.find(:first, :conditions => ["date = ?", date]).round
   end
 
+  def self.actual_round_games
+    Game.find_all_by_round Game.actual_round
+  end
+
+  def self.first_game_of_round
+    Game.actual_round_games.first
+  end
+
 end

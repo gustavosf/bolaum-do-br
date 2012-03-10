@@ -3,22 +3,6 @@
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
+ *= require application_more
  *= require_tree . 
 */
-
-div.ajax-loader {
-	text-align: center;
-	padding:20px;
-}
-
-#notification-area {
-  position: fixed;
-  left: 50%; margin-left: -200px;
-  z-index: 1050;
-  width: 400px;
-  overflow: auto;
-}
-#notification-area > .alert {
-  margin-bottom: 5px;
-  cursor: pointer;
-}
