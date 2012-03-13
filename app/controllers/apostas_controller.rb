@@ -36,7 +36,7 @@ class ApostasController < ApplicationController
   end
 
   def standing
-
+    @standings = current_user.standings
   end
 
 end
