@@ -35,4 +35,8 @@ class ApostasController < ApplicationController
     end
   end
 
+  def standing
+
+  end
+
 end
