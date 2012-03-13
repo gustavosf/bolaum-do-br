@@ -37,6 +37,27 @@ class ApostasController < ApplicationController
 
   def standing
     @standings = current_user.standings
+    if (@standings.empty?)
+      Club.all.each_with_index do |club, index|
+        Standing.new do |s|
+          s.user_id = current_user.id
+          s.club_id = club.id
+          s.position = index + 1
+          s.round = 0
+          s.save
+        end
+        Standing.new do |s|
+          s.user_id = current_user.id
+          s.club_id = club.id
+          s.position = index + 1
+          s.round = 1
+          s.save
+        end
+      end
+      @standings = current_user.standings
+    end
+
+    render 'standing', :layout => false
   end
 
 end
