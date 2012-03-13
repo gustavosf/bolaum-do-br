@@ -6,22 +6,26 @@
       %a{"data-toggle" => "tab", :href => "#2_turno"} 2º turno
   .tab-content
     #1_turno.tab-pane.active
-      %ol.sortable.standing
+      %ol.sortable.standing{:ref => 0}
         - @standings.find_all_by_round(0).each do |pos|
-          %li{:ref => pos.club.id}
+          %li{:ref => pos.club_id}
             %p
               = image_tag pos.club.logo
               = pos.club.popular_name
     #2_turno.tab-pane
-      %ol.sortable.standing
+      %ol.sortable.standing{:ref => 1}
         - @standings.find_all_by_round(1).each do |pos|
-          %li{:ref => pos.club.id}
+          %li{:ref => pos.club_id}
             %p
               = image_tag pos.club.logo
               = pos.club.popular_name
 
-:coffeescript
-  $(".sortable").sortable stop: (event, ui) ->
-    s = ($(num).attr 'ref' for num in ui.item.parent().children 'li')
-
-  $("#sortable").disableSelection()
+- if Game.actual_round == 1
+  :coffeescript
+    $(".sortable").sortable stop: (event, ui) ->
+      s = ($(num).attr 'ref' for num in ui.item.parent().children 'li')
+      r = ui.item.parent().attr 'ref'
+      $.post '/classificacao_bet', {round: r, standings: s}, (data) ->
+        console.log(data)
+        new Notification().success 'Classificação salva'
+    $("#sortable").disableSelection()
