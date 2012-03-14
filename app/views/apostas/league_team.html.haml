@@ -1,0 +1,109 @@
+.field
+  = image_tag 'player.png', {:class => 'player coach'}
+  %br
+  = image_tag 'player.png', {:class => 'player goalkeeper'}
+  %br
+  = image_tag 'player.png', {:class => 'player back1'}
+  = image_tag 'player.png', {:class => 'player back2'}
+  %br
+  = image_tag 'player.png', {:class => 'player leftback'}
+  = image_tag 'player.png', {:class => 'player rightback'}
+  %br
+  = image_tag 'player.png', {:class => 'player def-midfielder1'}
+  = image_tag 'player.png', {:class => 'player def-midfielder2'}
+  %br
+  = image_tag 'player.png', {:class => 'player midfielder1'}
+  = image_tag 'player.png', {:class => 'player midfielder2'}
+  %br
+  = image_tag 'player.png', {:class => 'player striker1'}
+  = image_tag 'player.png', {:class => 'player striker2'}
+  %br
+  = image_tag 'player.png', {:class => 'spacer'}
+
+:coffeescript
+  $('.player').click (event) ->
+    p = event.target.className.replace('player ', '')
+    $.post '/league_position', {position: p}, (data) ->
+      $.modal({
+        header: p,
+        content: data,
+        buttons: [
+          {
+            type: 'primary',
+            text: 'Salvar',
+            click: (modal) ->
+              o = {}
+              modal.find('input,select').each (i, el) ->
+                o[el.name] = el.value
+              $.post '/league_position', {position: p, bet: o}, (data) ->
+                modal.modal('hide');
+
+          }
+        ]
+      })
+    
+%style
+  :plain
+    .field {
+      background: url('assets/field.jpg') no-repeat;
+      background-size: 100%;
+    }
+    img.player {
+      width: 6%;
+      position: relative;
+      cursor: pointer;
+    }
+    img.coach {
+      margin-top: 1%;
+      margin-left: 5%;
+    }
+    img.goalkeeper {
+      margin-left: 47%;
+      margin-top: 5%;
+    }
+    img.back1 {
+      margin-top: 10%;
+      margin-left: 35%;
+    }
+    img.back2 {
+    margin-top: 10%;
+      margin-left: 17%;
+    }
+    img.leftback {
+      margin-top: 5%;
+      margin-left: 10%;
+    }
+    img.rightback {
+      margin-top: 5%;
+      margin-left: 67%;
+    }
+    img.def-midfielder1 {
+      margin-top: 10%;
+      margin-left: 35%;
+    }
+    img.def-midfielder2 {
+      margin-top: 10%;
+      margin-left: 18%;
+    }
+    img.midfielder1 {
+      margin-top: 10%;
+      margin-left: 20%;
+    }
+    img.midfielder2 {
+      margin-top: 10%;
+      margin-left: 50%;
+    }
+    img.striker1 {
+      margin-top: 10%;
+      margin-left: 40%;
+    }
+    img.striker2 {
+      margin-top: 20%;
+      margin-left: 10%;
+    }
+    img.spacer {
+      position: relative;
+      margin-top: 50%;
+      opacity: 0;
+      width: 1px;
+    }

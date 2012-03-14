@@ -61,7 +61,6 @@ class ApostasController < ApplicationController
   end
 
   def standing_bet
-    #debugger
     Standing.delete_all(:round => params[:round], :user_id => current_user.id)
 
     params[:standings].each_with_index do |club, index|
@@ -75,4 +74,37 @@ class ApostasController < ApplicationController
     end
     render :nothing => true
   end
+
+  def league_team
+    @team = current_user.league_teams
+    render 'league_team', :layout => false
+  end
+
+  def league_position
+    if params[:bet].nil?
+      @team = current_user.league_teams.find_all_by_position params[:position]
+      @clubs = Club.all
+      render 'league_position', :layout => false
+    else
+      LeagueTeam.delete_all(:user_id => current_user.id, :position => params[:position])
+      LeagueTeam.new do |l|
+        l.user_id = current_user.id
+        l.club_id = params[:bet]['titular_time']
+        l.player = params[:bet]['titular']
+        l.position = params[:position]
+        l.first = 1
+        l.save
+      end
+      LeagueTeam.new do |l|
+        l.user_id = current_user.id
+        l.club_id = params[:bet]['reserva_time']
+        l.player = params[:bet]['reserva']
+        l.position = params[:position]
+        l.first = 0
+        l.save
+      end
+      render :nothing => true
+    end
+  end
+
 end

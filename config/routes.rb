@@ -10,6 +10,8 @@ Bolao::Application.routes.draw do
     post 'bet' => :bet
     post 'classificacao_bet' => :standing_bet
     post 'selecao_bet' => :league_team_bet
+
+    post 'league_position' => :league_position
   end
 
   resources :sessions, :only => [:new, :create, :destroy]
