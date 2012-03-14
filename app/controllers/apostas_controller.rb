@@ -35,4 +35,44 @@ class ApostasController < ApplicationController
     end
   end
 
+  def standing
+    @standings = current_user.standings
+    if (@standings.empty?)
+      Club.all.each_with_index do |club, index|
+        Standing.new do |s|
+          s.user_id = current_user.id
+          s.club_id = club.id
+          s.position = index + 1
+          s.round = 0
+          s.save
+        end
+        Standing.new do |s|
+          s.user_id = current_user.id
+          s.club_id = club.id
+          s.position = index + 1
+          s.round = 1
+          s.save
+        end
+      end
+      @standings = current_user.standings
+    end
+
+    render 'standing', :layout => false
+  end
+
+  def standing_bet
+    #debugger
+    Standing.delete_all(:round => params[:round], :user_id => current_user.id)
+
+    params[:standings].each_with_index do |club, index|
+      Standing.new do |s|
+        s.user_id = current_user.id
+        s.club_id = club
+        s.position = index + 1
+        s.round = params[:round]
+        s.save
+      end
+    end
+    render :nothing => true
+  end
 end

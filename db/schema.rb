@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120309165602) do
+ActiveRecord::Schema.define(:version => 20120313164109) do
 
   create_table "bets", :force => true do |t|
     t.integer  "game_id"
@@ -55,6 +55,15 @@ ActiveRecord::Schema.define(:version => 20120309165602) do
     t.string   "location"
     t.string   "name"
     t.string   "popular_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "standings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "position"
+    t.integer  "club_id"
+    t.integer  "round"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
