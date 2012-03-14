@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(document).ready ->
-  $('.tabbable > ul > li a').click ->
+  $('.tabbable > ul > li a').click (event) ->
     return if $(event.target).parent().hasClass 'active'
     link = $(event.target).attr 'data-content'
     console.log link
@@ -11,7 +11,7 @@ $(document).ready ->
 
   $.post '/rodada', (data) ->
     $('#rodada').html data
-    $('#rodada input').keypress ->
+    $('#rodada input').keypress (event)->
       value = String.fromCharCode(event.which)
       return false if !isNumber(value) 
       $(event.target).val(value)
