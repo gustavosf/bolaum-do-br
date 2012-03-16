@@ -1,0 +1,121 @@
+.field
+  .player.coach
+    = image_tag 'player.png'
+    - @team.find_all_by_position('coach').each do |player|
+      %span= player.player + ' (' + player.club.acronym + ')'
+  .player.goalkeeper
+    = image_tag 'player.png'
+    - @team.find_all_by_position('goalkeeper').each do |player|
+      %span= player.player + ' (' + player.club.acronym + ')'
+  .player.back1
+    = image_tag 'player.png'
+    - @team.find_all_by_position('back1').each do |player|
+      %span= player.player + ' (' + player.club.acronym + ')'
+  .player.back2
+    = image_tag 'player.png'
+    - @team.find_all_by_position('back2').each do |player|
+      %span= player.player + ' (' + player.club.acronym + ')'
+  .player.leftback
+    = image_tag 'player.png'
+    - @team.find_all_by_position('leftback').each do |player|
+      %span= player.player + ' (' + player.club.acronym + ')'
+  .player.rightback
+    = image_tag 'player.png'
+    - @team.find_all_by_position('rightback').each do |player|
+      %span= player.player + ' (' + player.club.acronym + ')'
+  .player.def-midfielder1
+    = image_tag 'player.png'
+    - @team.find_all_by_position('def-midfielder1').each do |player|
+      %span= player.player + ' (' + player.club.acronym + ')'
+  .player.def-midfielder2
+    = image_tag 'player.png'
+    - @team.find_all_by_position('def-midfielder2').each do |player|
+      %span= player.player + ' (' + player.club.acronym + ')'
+  .player.midfielder1
+    = image_tag 'player.png'
+    - @team.find_all_by_position('midfielder1').each do |player|
+      %span= player.player + ' (' + player.club.acronym + ')'
+  .player.midfielder2
+    = image_tag 'player.png'
+    - @team.find_all_by_position('midfielder2').each do |player|
+      %span= player.player + ' (' + player.club.acronym + ')'
+  .player.striker1
+    = image_tag 'player.png'
+    - @team.find_all_by_position('striker1').each do |player|
+      %span= player.player + ' (' + player.club.acronym + ')'
+  .player.striker2
+    = image_tag 'player.png'
+    - @team.find_all_by_position('striker2').each do |player|
+      %span= player.player + ' (' + player.club.acronym + ')'
+  .spacer ^^
+
+- if Game.actual_round == 1
+  :coffeescript
+    $('.player').click (event) ->
+      div = $(this)
+      p = this.className.replace('player ', '')
+      $.post '/league_position', {position: p}, (data) ->
+        $.modal({
+          header: p,
+          content: data,
+          buttons: [
+            {
+              type: 'primary',
+              text: 'Salvar',
+              click: (modal) ->
+                o = {}
+                modal.find('input,select').each (i, el) ->
+                  o[el.name] = el.value
+                $.post '/league_position', {position: p, bet: o}, (data) ->
+                  div.children('span').remove()
+                  $('<span>').html(data.first).appendTo div
+                  $('<span>').html(data.second).appendTo div
+                  modal.modal('hide');
+                'json'
+
+            }
+          ]
+        })
+    
+%style
+  :plain
+    .field {
+      background: url('assets/field.jpg') no-repeat;
+      background-size: 100%;
+      padding-top: 1%;
+    }
+    .player {
+      width: 15%;
+      height: 11%;
+      position: relative;
+      text-align: center;
+      overflow: visible;
+      display: block;
+    }
+    .player span {
+      display: block;
+      width: 200px;
+      margin-left: -25%;
+      background-image: url(assets/transparent-bg.png);
+      color: white;
+      font-weight: bold;
+    }
+    .player img { cursor: pointer; width: 42%; vertical-align: top; }
+    .player.coach           { margin: 0      0 0 5%;    }
+    .player.goalkeeper      { margin: -3%    0 0 42.5%; }
+    .player.back1           { margin: 0      0 0 30%;   }
+    .player.back2           { margin: -6.5%  0 0 54.5%; }
+    .player.leftback        { margin: 8%     0 0 10%;   }
+    .player.rightback       { margin: -6.5%  0 0 75.5%; }
+    .player.def-midfielder1 { margin: 10%    0 0 33%;   }
+    .player.def-midfielder2 { margin: -8.5%  0 0 52%;   }
+    .player.midfielder1     { margin: 10%    0 0 10%;   }
+    .player.midfielder2     { margin: -6.5%  0 0 75%;   }
+    .player.striker1        { margin: 10%    0 0 30%;   }
+    .player.striker2        { margin: 0%     0 0 55%;   }
+    .spacer {
+      position: relative;
+      margin-top: 55%;
+      opacity: 0;
+      width: 1px;
+    }

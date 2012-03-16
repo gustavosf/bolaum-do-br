@@ -12,4 +12,5 @@ class User < ActiveRecord::Base
 
   has_many :bets
   has_many :standings
+  has_many :league_teams
 end
