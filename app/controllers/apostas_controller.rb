@@ -87,7 +87,7 @@ class ApostasController < ApplicationController
       render 'league_position', :layout => false
     else
       LeagueTeam.delete_all(:user_id => current_user.id, :position => params[:position])
-      LeagueTeam.new do |l|
+      first = LeagueTeam.new do |l|
         l.user_id = current_user.id
         l.club_id = params[:bet]['titular_time']
         l.player = params[:bet]['titular']
@@ -95,7 +95,7 @@ class ApostasController < ApplicationController
         l.first = 1
         l.save
       end
-      LeagueTeam.new do |l|
+      second = LeagueTeam.new do |l|
         l.user_id = current_user.id
         l.club_id = params[:bet]['reserva_time']
         l.player = params[:bet]['reserva']
@@ -103,7 +103,10 @@ class ApostasController < ApplicationController
         l.first = 0
         l.save
       end
-      render :nothing => true
+      render :json => {
+        :first => "#{first.player} (#{first.club.acronym})",
+        :second => "#{second.player} (#{second.club.acronym})"
+      }
     end
   end
 

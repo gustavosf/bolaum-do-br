@@ -2,10 +2,10 @@ Indique o jogador titular da posição:
 %br
 %br
 %input{:name=>'titular', :value=>@team.empty? ? '' : @team.first.player}
-= select_tag 'titular_time', options_from_collection_for_select(@clubs, 'id', 'popular_name')
+= select_tag 'titular_time', options_from_collection_for_select(@clubs, 'id', 'popular_name', @team.empty? ? nil : @team.first.club_id)
 %hr
 Indique o jogador Reserva da posição:
 %br
 %br
 %input{:name=>'reserva', :value=>@team.empty? ? '' : @team.last.player}
-= select_tag 'reserva_time', options_from_collection_for_select(@clubs, 'id', 'popular_name')
+= select_tag 'reserva_time', options_from_collection_for_select(@clubs, 'id', 'popular_name', @team.empty? ? nil : @team.last.club_id)
