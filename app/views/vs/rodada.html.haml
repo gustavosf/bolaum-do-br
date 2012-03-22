@@ -1,0 +1,38 @@
+.row
+  .span5{:style => 'text-align:right'}
+    = image_tag @players[0].photo
+    %hr
+    - @round.each do |game|
+      .row.jogo{:style => 'float:right;'}
+        - bet = game.bets.find_by_user_id @players[0].id
+        .info
+          = game.date.strftime "%d/%m %H:%M" + ' - '
+          = game.stadium ? game.stadium.popular_name : 'A definir'
+        .row
+          .placar
+            %div.mandante
+              %img{:src => "#{game.home.logo}"}
+              %input{:disabled => true, :value => "#{bet.home_score unless bet.nil?}"}
+            %span vs
+            %div.visitante
+              %input{:disabled => true, :value => "#{bet.visitor_score unless bet.nil?}"}
+              %img{:src => "#{game.visitor.logo}"}
+  .span2.vs vs
+  .span5{:style => 'text-align:left'}
+    = image_tag @players[1].photo
+    %hr
+    - @round.each do |game|
+      .row.jogo{:style => 'float:left'}
+        - bet = game.bets.find_by_user_id @players[1].id
+        .info
+          = game.date.strftime "%d/%m %H:%M" + ' - '
+          = game.stadium ? game.stadium.popular_name : 'A definir'
+        .row
+          .placar
+            %div.mandante
+              %img{:src => "#{game.home.logo}"}
+              %input{:disabled => true, :value => "#{bet.home_score unless bet.nil?}"}
+            %span vs
+            %div.visitante
+              %input{:disabled => true, :value => "#{bet.visitor_score unless bet.nil?}"}
+              %img{:src => "#{game.visitor.logo}"}

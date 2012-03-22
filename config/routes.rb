@@ -1,5 +1,7 @@
 Bolao::Application.routes.draw do
 
+  get "vs/rodada"
+
   root :to => 'apostas#index'
 
   controller :apostas do
@@ -19,6 +21,10 @@ Bolao::Application.routes.draw do
     get 'login' => :new
     post 'login' => :create
     get 'logout' => :destroy
+  end
+
+  controller :vs do
+    get 'rodada' => :rodada
   end
 
   # The priority is based upon order of creation:
