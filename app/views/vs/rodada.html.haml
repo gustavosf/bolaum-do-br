@@ -1,38 +1,68 @@
-.row
-  .span5{:style => 'text-align:right'}
+#vs.row
+  .span5{:style => 'text-align:center'}
     = image_tag @players[0].photo
-    %hr
+    
+    %h4.divider Score
+    = @players[0].bets.sum :points
+
+    %h4.divider Apostas
+    - points = gm = 0
     - @round.each do |game|
-      .row.jogo{:style => 'float:right;'}
+      .jogo
         - bet = game.bets.find_by_user_id @players[0].id
+        - points += bet.nil? ? 0 : bet.points
+        - gm += bet.nil? ? 0 : bet.points / 6
         .info
           = game.date.strftime "%d/%m %H:%M" + ' - '
           = game.stadium ? game.stadium.popular_name : 'A definir'
-        .row
-          .placar
-            %div.mandante
-              %img{:src => "#{game.home.logo}"}
-              %input{:disabled => true, :value => "#{bet.home_score unless bet.nil?}"}
-            %span vs
-            %div.visitante
-              %input{:disabled => true, :value => "#{bet.visitor_score unless bet.nil?}"}
-              %img{:src => "#{game.visitor.logo}"}
+        .placar
+          .mandante
+            .logo= image_tag game.home.logo
+            .team= game.home.acronym
+            .score= bet.nil? ? '-' : bet.home_score
+          %span x
+          .visitante
+            .score= bet.nil? ? '-' : bet.visitor_score
+            .team= game.visitor.acronym
+            .logo= image_tag game.visitor.logo
+          .pontuation{:style => 'float:right;margin-right:10px'}
+            = bet.nil? ? '-' : bet.points or '-'
+    %h4.divider PONTUAÇÃO
+    = "#{points} Pontos"
+    %br
+    = "#{gm} GMs"
+  
   .span2.vs vs
-  .span5{:style => 'text-align:left'}
+  
+  .span5{:style => 'text-align:center'}
     = image_tag @players[1].photo
-    %hr
+    
+    %h4.divider Score
+    = @players[1].bets.sum :points
+
+    %h4.divider Apostas
+    - points = gm = 0
     - @round.each do |game|
-      .row.jogo{:style => 'float:left'}
+      .jogo
         - bet = game.bets.find_by_user_id @players[1].id
+        - points += bet.nil? ? 0 : bet.points
+        - gm += bet.nil? ? 0 : bet.points / 6
         .info
           = game.date.strftime "%d/%m %H:%M" + ' - '
           = game.stadium ? game.stadium.popular_name : 'A definir'
-        .row
-          .placar
-            %div.mandante
-              %img{:src => "#{game.home.logo}"}
-              %input{:disabled => true, :value => "#{bet.home_score unless bet.nil?}"}
-            %span vs
-            %div.visitante
-              %input{:disabled => true, :value => "#{bet.visitor_score unless bet.nil?}"}
-              %img{:src => "#{game.visitor.logo}"}
+        .pontuation{:style => 'float:left;margin-left:10px'}
+          = bet.nil? ? '-' : bet.points or '-'
+        .placar
+          .mandante
+            .logo= image_tag game.home.logo
+            .team= game.home.acronym
+            .score= bet.nil? ? '-' : bet.home_score
+          %span x
+          .visitante
+            .score= bet.nil? ? '-' : bet.visitor_score
+            .team= game.visitor.acronym
+            .logo= image_tag game.visitor.logo
+    %h4.divider Pontuação
+    = "#{points} Pontos"
+    %br
+    = "#{gm} GMs"

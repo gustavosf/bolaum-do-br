@@ -1,0 +1,8 @@
+@media screen {
+	@font-face {
+	  font-family: 'Play';
+	  font-style: normal;
+	  font-weight: normal;
+	  src: local('Play'), url('http://themes.googleusercontent.com/font?kit=2aWWoXu6F0FNMw1UFZVH_A') format('woff');
+	}
+}

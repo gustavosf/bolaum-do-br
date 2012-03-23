@@ -19,12 +19,13 @@
             %a.brand{:href=>'/'} Bolão
             %div.nav-collapse
               %ul.nav
-                %li.active 
-                  %a{:href=>'#'} Home
-                %li
-                  %a{:href=>'#'} About
-                %li
-                  %a{:href=>'#'} Contact
+                %li.dropdown
+                  %a.dropdown-toggle{:href=>'#', 'data-toggle'=>'dropdown'}
+                    Versus
+                    %b.caret
+                  %ul.dropdown-menu
+                    %li
+                      %li= link_to 'Rodada', vs_rodada_url
               %ul.nav.pull-right
                 %li.dropdown
                   %a.dropdown-toggle{:href=>'#', 'data-toggle'=>'dropdown'}
@@ -34,8 +35,8 @@
                   %ul.dropdown-menu
                     %li
                       %a{:href=>'#'} Meus dados
-                      %li.divider
-                      %li= link_to 'Logout', logout_url
+                    %li.divider
+                    %li= link_to 'Logout', logout_url
 
     %div.container
       - if flash[:error]
