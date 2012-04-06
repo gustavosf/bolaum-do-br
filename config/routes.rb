@@ -21,6 +21,11 @@ Bolao::Application.routes.draw do
     get 'logout' => :destroy
   end
 
+  controller :vs do
+    get 'vs/rodada'  => :round
+    get 'vs/selecao' => :league_team
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

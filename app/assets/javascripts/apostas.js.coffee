@@ -3,11 +3,17 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(document).ready ->
+  
+  
   $('.tabbable > ul > li a').click (event) ->
     return if $(event.target).parent().hasClass 'active'
     link = $(event.target).attr 'data-content'
-    console.log link
     $.post '/' + link, (data) -> $('#pane').html data
+
+  $(window).bind 'hashchange', ->
+    $('.tabbable a[href='+location.hash+']').trigger('click');
+
+  $('.tabbable a[href='+location.hash+']').trigger('click');
 
   $.post '/rodada', (data) ->
     $('#rodada').html data
