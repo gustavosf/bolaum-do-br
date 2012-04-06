@@ -21,11 +21,24 @@
               %ul.nav
                 %li.dropdown
                   %a.dropdown-toggle{:href=>'#', 'data-toggle'=>'dropdown'}
+                    Apostas
+                    %b.caret
+                  %ul.dropdown-menu
+                    %li
+                      %a{:href=>root_url} Minhas Apostas
+                    %li
+                      %a{:href=>root_url+"#classificacao"} Classificação
+                    %li
+                      %a{:href=>root_url+"#selecao"} Seleção
+                %li.dropdown
+                  %a.dropdown-toggle{:href=>'#', 'data-toggle'=>'dropdown'}
                     Versus
                     %b.caret
                   %ul.dropdown-menu
                     %li
                       %li= link_to 'Rodada', vs_rodada_url
+                    %li
+                      %li= link_to 'Seleção', vs_selecao_url
               %ul.nav.pull-right
                 %li.dropdown
                   %a.dropdown-toggle{:href=>'#', 'data-toggle'=>'dropdown'}

@@ -1,7 +1,5 @@
 Bolao::Application.routes.draw do
 
-  get "vs/rodada"
-
   root :to => 'apostas#index'
 
   controller :apostas do
@@ -24,7 +22,8 @@ Bolao::Application.routes.draw do
   end
 
   controller :vs do
-    get 'rodada' => :rodada
+    get 'vs/rodada'  => :round
+    get 'vs/selecao' => :league_team
   end
 
   # The priority is based upon order of creation:
