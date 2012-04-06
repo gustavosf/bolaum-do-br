@@ -110,4 +110,7 @@ class ApostasController < ApplicationController
     end
   end
 
+  def rules
+  end
+
 end

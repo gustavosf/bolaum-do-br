@@ -3,6 +3,8 @@ Bolao::Application.routes.draw do
   root :to => 'apostas#index'
 
   controller :apostas do
+    get 'regulamento' => :rules
+
     post 'rodada' => :rodada
     post 'classificacao' => :standing
     post 'selecao' => :league_team
