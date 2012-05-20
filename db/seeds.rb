@@ -12,8 +12,8 @@ require 'net/http'
 
 resource = 'http://globoesporte.globo.com/dynamo/futebol/campeonato/campeonato-brasileiro/brasileirao2012/classificacao.json'
 
-resp = Net::HTTP.get_response(URI.parse(resource))
-json = JSON.parse resp.body
+resp = Net::HTTP.get_response(URI.parse(resource)).body
+json = JSON.parse resp
 
 User.delete_all
 User.new do |u|
