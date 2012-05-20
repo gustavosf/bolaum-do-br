@@ -3,7 +3,7 @@
     = image_tag @players[0].photo
     
     %h4.divider Apostas
-    - if @round == 1
+    - if @round <= 2
       .alert.alert-error Apostas não são visíveis antes da primeira rodada
     - else
       - @team = @players[0].league_teams
@@ -89,7 +89,7 @@
     = image_tag @players[1].photo
 
     %h4.divider Apostas
-    - if @round == 1
+    - if @round <= 2
       .alert.alert-error Apostas não são visíveis antes da primeira rodada
     - else 
       - @team = @players[1].league_teams
