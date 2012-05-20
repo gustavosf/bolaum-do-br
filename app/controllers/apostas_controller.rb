@@ -136,7 +136,7 @@ class ApostasController < ApplicationController
         next unless game['rodada'] == round or game['rodada'] == round + 1
         g = Game.find(game['jogo_id']) or Game.new
         played  = true if game['placar_mandante'] and game['placar_visitante']
-        changed = true if game['placar_mandante'] != g.home_score and game['placar_visitante'] != g.visitor_score
+        changed = true if game['placar_mandante'] != g.home_score or game['placar_visitante'] != g.visitor_score
 
         g.id            = game['jogo_id']
         g.round         = game['rodada']
