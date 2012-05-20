@@ -9,18 +9,16 @@
       %ol.sortable.standing{:ref => 0}
         - @standings.find_all_by_round(0).each do |pos|
           %li{:ref => pos.club_id}
-            %p
-              = image_tag pos.club.logo
-              = pos.club.popular_name
+            %div= image_tag pos.club.logo
+            = pos.club.popular_name
     #2_turno.tab-pane
       %ol.sortable.standing{:ref => 1}
         - @standings.find_all_by_round(1).each do |pos|
           %li{:ref => pos.club_id}
-            %p
-              = image_tag pos.club.logo
-              = pos.club.popular_name
+            %div= image_tag pos.club.logo
+            = pos.club.popular_name
 
-- if Game.actual_round == 1
+- if Game.actual_round <= 2
   :coffeescript
     $(".sortable").sortable stop: (event, ui) ->
       s = ($(num).attr 'ref' for num in ui.item.parent().children 'li')
@@ -29,3 +27,34 @@
         console.log(data)
         new Notification().success 'Classificação salva'
     $("#sortable").disableSelection()
+
+%style
+  :plain
+    ol {
+      padding-left:10px;
+    }
+    ol li {
+      font-size: 18px !important;
+      line-height: 50px;
+      cursor: pointer;
+    }
+    ol li div {
+      display: inline;
+      width: 40px;
+      text-align: center;
+      margin: -8px 5px 0px 0px;
+    }
+    ol li div img {
+      vertical-align: middle;
+    }
+    ol li:nth-child(-n+11) {
+      width: 200px;
+      margin-left: 0px;
+    }
+    ol li:nth-child(n+11) {
+      width: 200px;
+      margin-left: 300px;
+    }
+    ol li:nth-child(11) {
+      margin-top: -500px;
+    }
