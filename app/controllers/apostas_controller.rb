@@ -114,4 +114,48 @@ class ApostasController < ApplicationController
   def rules
   end
 
+  def update_bets
+    resource = 'http://globoesporte.globo.com/dynamo/futebol/campeonato/campeonato-brasileiro/brasileirao2012/classificacao.json'
+    resp = Net::HTTP.get_response(URI.parse(resource))
+
+    json_ret = {
+      :error => false,
+      :message => nil,
+      :data => {}
+    }
+
+    if resp.nil?
+      json_ret[:error] = true
+      json_ret[:message] = 'Um erro ocorreu, tente novamente mais tarde'
+    else
+      data = JSON.parse resp.body
+
+      round = Game.actual_round
+      games = data['lista_de_jogos']['campeonato']['edicao_campeonato']['fases'][0]['jogos']
+      games.each do |game| # here, game is an array, not an object (no keys indeed)
+        next unless game['rodada'] == round or game['rodada'] == round + 1
+        g = Game.find(game['jogo_id']) or Game.new
+        played  = true if game['placar_mandante'] and game['placar_visitante']
+        changed = true if game['placar_mandante'] != g.home_score and game['placar_visitante'] != g.visitor_score
+
+        g.id            = game['jogo_id']
+        g.round         = game['rodada']
+        g.date          = game['data_original'] + ' ' + (game['hora'] or '00h00').gsub('h', ':') + ':00'
+        g.stadium_id    = game['sede']
+        g.home_id       = game['equipe_mandante']
+        g.visitor_id    = game['equipe_visitante']
+        g.attendance    = game['public_total']
+        g.income        = game['renda']['total']
+        g.url           = game['url_confronto']
+        g.home_score    = game['placar_mandante']
+        g.visitor_score = game['placar_visitante']
+        g.update_bets if played and changed
+        g.save
+        json_ret[:message] = 'As apostas da rodada foram atualizadas!'
+      end
+    end
+
+    render :json => json_ret
+  end
+
 end

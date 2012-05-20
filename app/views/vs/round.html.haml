@@ -32,7 +32,9 @@
     %br
     = "#{gm} GMs"
   
-  .span2.vs vs
+  .span2.vs
+    vs<br>
+    %button{:onclick => 'update(this)'} Update
   
   .span5{:style => 'text-align:center'}
     = image_tag @players[1].photo

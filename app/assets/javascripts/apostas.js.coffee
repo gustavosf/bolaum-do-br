@@ -4,7 +4,6 @@
 
 $(document).ready ->
   
-  
   $('.tabbable > ul > li a').click (event) ->
     return if $(event.target).parent().hasClass 'active'
     link = $(event.target).attr 'data-content'

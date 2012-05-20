@@ -39,3 +39,6 @@ group :development, :test do
 end
 
 gem 'haml'
+
+require 'json'
+require 'net/http'
