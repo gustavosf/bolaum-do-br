@@ -18,14 +18,15 @@ Bolao::Application.routes.draw do
 
   resources :sessions, :only => [:new, :create, :destroy]
   controller :sessions do 
-    get 'login' => :new
+    get 'login'  => :new
     post 'login' => :create
     get 'logout' => :destroy
   end
 
   controller :vs do
-    get 'vs/rodada'  => :round
-    get 'vs/selecao' => :league_team
+    get 'vs/rodada'        => :round
+    get 'vs/selecao'       => :league_team
+    get 'vs/classificacao' => :standing
   end
 
   # The priority is based upon order of creation:
