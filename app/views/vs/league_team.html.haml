@@ -10,52 +10,77 @@
       .field
         .player.coach
           = image_tag 'player.png'
-          - @team.find_all_by_position('coach').each do |player|
-            %span= player.player + ' (' + player.club.acronym + ')'
+          %span
+            - @team.find_all_by_position('coach').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
         .player.goalkeeper
           = image_tag 'player.png'
-          - @team.find_all_by_position('goalkeeper').each do |player|
-            %span= player.player + ' (' + player.club.acronym + ')'
+          %span
+            - @team.find_all_by_position('goalkeeper').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
         .player.back1
           = image_tag 'player.png'
-          - @team.find_all_by_position('back1').each do |player|
-            %span= player.player + ' (' + player.club.acronym + ')'
+          %span
+            - @team.find_all_by_position('back1').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
         .player.back2
           = image_tag 'player.png'
-          - @team.find_all_by_position('back2').each do |player|
-            %span= player.player + ' (' + player.club.acronym + ')'
+          %span
+            - @team.find_all_by_position('back2').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+
         .player.leftback
           = image_tag 'player.png'
-          - @team.find_all_by_position('leftback').each do |player|
-            %span= player.player + ' (' + player.club.acronym + ')'
+          %span
+            - @team.find_all_by_position('leftback').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
         .player.rightback
           = image_tag 'player.png'
-          - @team.find_all_by_position('rightback').each do |player|
-            %span= player.player + ' (' + player.club.acronym + ')'
+          %span
+            - @team.find_all_by_position('rightback').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
         .player.def-midfielder1
           = image_tag 'player.png'
-          - @team.find_all_by_position('def-midfielder1').each do |player|
-            %span= player.player + ' (' + player.club.acronym + ')'
+          %span
+            - @team.find_all_by_position('def-midfielder1').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
         .player.def-midfielder2
           = image_tag 'player.png'
-          - @team.find_all_by_position('def-midfielder2').each do |player|
-            %span= player.player + ' (' + player.club.acronym + ')'
+          %span
+            - @team.find_all_by_position('def-midfielder2').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
         .player.midfielder1
           = image_tag 'player.png'
-          - @team.find_all_by_position('midfielder1').each do |player|
-            %span= player.player + ' (' + player.club.acronym + ')'
+          %span
+            - @team.find_all_by_position('midfielder1').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
         .player.midfielder2
           = image_tag 'player.png'
-          - @team.find_all_by_position('midfielder2').each do |player|
-            %span= player.player + ' (' + player.club.acronym + ')'
+          %span
+            - @team.find_all_by_position('midfielder2').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
         .player.striker1
           = image_tag 'player.png'
-          - @team.find_all_by_position('striker1').each do |player|
-            %span= player.player + ' (' + player.club.acronym + ')'
+          %span
+            - @team.find_all_by_position('striker1').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
         .player.striker2
           = image_tag 'player.png'
-          - @team.find_all_by_position('striker2').each do |player|
-            %span= player.player + ' (' + player.club.acronym + ')'
+          %span
+            - @team.find_all_by_position('striker2').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
         .spacer ^^
      
   .span2.vs vs
@@ -162,7 +187,6 @@
     .player span {
       display: block;
       position: absolute;
-      width: 100px;
       margin-left: -35%;
       background-image: url(/assets/transparent-bg.png);
       color: white;
