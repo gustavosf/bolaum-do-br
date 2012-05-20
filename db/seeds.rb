@@ -11,8 +11,25 @@ require 'json'
 require 'net/http'
 
 resource = 'http://globoesporte.globo.com/dynamo/futebol/campeonato/campeonato-brasileiro/brasileirao2012/classificacao.json'
+
 resp = Net::HTTP.get_response(URI.parse(resource))
 json = JSON.parse resp.body
+
+User.delete_all
+User.new do |u|
+  u.email = 'gustavosf@gmail.com'
+  u.password = 'falkland'
+  u.name = 'Gustavo'
+  u.photo = '/photos/gustavo.jpg'
+  u.save
+end
+User.new do |u|
+  u.email = 'mauriciosf@gmail.com'
+  u.password = '12345'
+  u.name = 'Mauricio'
+  u.photo = '/photos/mauricio.jpg'
+  u.save
+end
 
 # loading all clubs
 Club.delete_all

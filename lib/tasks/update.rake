@@ -6,12 +6,12 @@ namespace :update do
   def data
     resource = 'http://globoesporte.globo.com/dynamo/futebol/campeonato/campeonato-brasileiro/brasileirao2012/classificacao.json'
     resp = Net::HTTP.get_response(URI.parse(resource))
-    j = JSON.parse resp.body
+    JSON.parse resp.body
   end
   
   desc "Update club information into database"
   task :clubs do
-    clubs = json['lista_de_jogos']['campeonato']['edicao_campeonato']['equipes']
+    clubs = data['lista_de_jogos']['campeonato']['edicao_campeonato']['equipes']
     clubs.each do |club|
       c = Club.find(club[1]['organizacao_id']) or Club.new
       c.id           = club[1]['organizacao_id']
