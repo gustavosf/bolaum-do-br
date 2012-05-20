@@ -1,7 +1,7 @@
 class VsController < ApplicationController
   
   def round
-    @round   = Game.find_all_by_round Game.actual_round - 1
+    @round   = Game.find_all_by_round Game.actual_round
     @players = User.all
   end
 
