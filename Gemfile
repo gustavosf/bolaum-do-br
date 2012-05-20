@@ -14,9 +14,11 @@ group :assets do
   gem 'sass-rails', "  ~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
+  gem 'twitter-bootstrap-rails', "~> 2.0.1.0"
 end
 
 gem 'jquery-rails'
+gem 'coffee-filter'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -31,3 +33,12 @@ group :test do
   # Pretty printed test output
   gem 'turn', :require => false
 end
+
+group :development, :test do
+  gem 'ruby-debug19', :require => 'ruby-debug'
+end
+
+gem 'haml'
+
+require 'json'
+require 'net/http'

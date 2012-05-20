@@ -1,0 +1,213 @@
+#vs.row
+  .span5{:style => 'text-align:center'}
+    = image_tag @players[0].photo
+    
+    %h4.divider Apostas
+    - if @round <= 2
+      .alert.alert-error Apostas não são visíveis antes da primeira rodada
+    - else
+      - @team = @players[0].league_teams
+      .field
+        .player.coach
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('coach').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.goalkeeper
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('goalkeeper').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.back1
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('back1').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.back2
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('back2').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+
+        .player.leftback
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('leftback').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.rightback
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('rightback').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.def-midfielder1
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('def-midfielder1').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.def-midfielder2
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('def-midfielder2').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.midfielder1
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('midfielder1').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.midfielder2
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('midfielder2').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.striker1
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('striker1').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.striker2
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('striker2').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .spacer ^^
+     
+  .span2.vs vs
+  
+  .span5{:style => 'text-align:center'}
+    = image_tag @players[1].photo
+
+    %h4.divider Apostas
+    - if @round <= 2
+      .alert.alert-error Apostas não são visíveis antes da primeira rodada
+    - else 
+      - @team = @players[1].league_teams
+      .field
+        .player.coach
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('coach').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.goalkeeper
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('goalkeeper').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.back1
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('back1').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.back2
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('back2').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+
+        .player.leftback
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('leftback').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.rightback
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('rightback').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.def-midfielder1
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('def-midfielder1').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.def-midfielder2
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('def-midfielder2').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.midfielder1
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('midfielder1').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.midfielder2
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('midfielder2').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.striker1
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('striker1').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .player.striker2
+          = image_tag 'player.png'
+          %span
+            - @team.find_all_by_position('striker2').each do |player|
+              = player.player + ' (' + player.club.acronym + ')'
+              %br
+        .spacer ^^
+
+%style
+  :plain
+    .field {
+      background: url('/assets/field.jpg') no-repeat;
+      background-size: 100%;
+      padding-top: 1%;
+    }
+    .player {
+      width: 15%;
+      height: 11%;
+      position: relative;
+      text-align: center;
+      overflow: visible;
+      display: block;
+    }
+    .player span {
+      display: block;
+      position: absolute;
+      margin-left: -35%;
+      background-image: url(/assets/transparent-bg.png);
+      color: white;
+      font-weight: bold;
+    }
+    .player img { cursor: pointer; width: 42%; vertical-align: top; }
+    .player.coach           { margin: 0      0 0 5%;    }
+    .player.goalkeeper      { margin: 5%     0 0 42.5%; }
+    .player.back1           { margin: 10%    0 0 25%;   }
+    .player.back2           { margin: -6.5%  0 0 60%; }
+    .player.leftback        { margin: 15%     0 0 10%;   }
+    .player.rightback       { margin: -6.5%  0 0 75.5%; }
+    .player.def-midfielder1 { margin: 30%    0 0 33%;   }
+    .player.def-midfielder2 { margin: -25%  0 0 52%;   }
+    .player.midfielder1     { margin: 20%    0 0 10%;   }
+    .player.midfielder2     { margin: -4.5%  0 0 75%;   }
+    .player.striker1        { margin: 10%    0 0 30%;   }
+    .player.striker2        { margin: 15%     0 0 55%;   }
+    .spacer {
+      position: relative;
+      margin-top: 55%;
+      opacity: 0;
+      width: 1px;
+    }

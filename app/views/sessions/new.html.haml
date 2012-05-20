@@ -1,0 +1,14 @@
+= form_tag sessions_path, :class => 'form-horizontal span6 offset3' do
+  %fieldset
+    %center
+      %legend Identifique-se
+    = hidden_field_tag :user_id
+    
+    %center
+      #users-container
+        - @users.each do |u|
+          %img.user{:src => u.photo, :width => '150px', :onclick => "select_user(#{u.id}, this)"}
+    
+      #password-container
+        = password_field_tag :password, nil, :class => 'input-xlarge', :placeholder => 'senha'
+        = submit_tag "Log in", :class => 'btn btn-primary'

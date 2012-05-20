@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  game_id: 
+  user: 
+  home_score: 
+  visitor_score: 
+  points: 
+
+two:
+  game_id: 
+  user: 
+  home_score: 
+  visitor_score: 
+  points: 

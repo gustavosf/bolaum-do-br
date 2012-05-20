@@ -1,0 +1,19 @@
+.hero-unit
+  %p Algo aqui depois
+
+
+.row-fluid
+  #rodada.span3
+    = ajax_loader
+  .span9
+    .tabbable
+      %ul.nav.nav-tabs
+        %li
+          %a{"data-toggle" => "tab", :href => "#overview"} Overview
+        %li
+          %a{"data-toggle" => "tab", :href => "#classificacao", "data-content" => "classificacao"} Classificação
+        %li
+          %a{"data-toggle" => "tab", :href => "#selecao", "data-content" => "selecao"} Seleção
+      .tab-content
+        #pane.tab-pane.active
+          %p

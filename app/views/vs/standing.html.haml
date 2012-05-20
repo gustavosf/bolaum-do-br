@@ -1,0 +1,67 @@
+#vs.row
+  .span5{:style => 'text-align:center'}
+    = image_tag @players[0].photo
+    
+    - if @round <= 2
+      .alert.alert-error Apostas não são visíveis antes da primeira rodada
+    - else
+      %h4.divider Primeiro Turno
+      - @standings = @players[0].standings
+      %table.standings
+        - @standings.find_all_by_round(0).each_with_index do |pos,i|
+          %tr
+            %td=i+1
+            %td=image_tag pos.club.logo
+            %td= pos.club.popular_name
+
+      %h4.divider Classificação Final
+      - @standings = @players[0].standings
+      %table.standings
+        - @standings.find_all_by_round(1).each_with_index do |pos,i|
+          %tr
+            %td=i+1
+            %td=image_tag pos.club.logo
+            %td= pos.club.popular_name
+
+  .span2.vs vs
+  
+  .span5{:style => 'text-align:center'}
+    = image_tag @players[1].photo
+    
+    - if @round <= 2
+      .alert.alert-error Apostas não são visíveis antes da primeira rodada
+    - else
+      %h4.divider Primeiro Turno
+      - @standings = @players[1].standings
+      %table.standings
+        - @standings.find_all_by_round(0).each_with_index do |pos,i|
+          %tr
+            %td=i+1
+            %td=image_tag pos.club.logo
+            %td= pos.club.popular_name
+
+      %h4.divider Classificação Final
+      - @standings = @players[1].standings
+      %table.standings
+        - @standings.find_all_by_round(1).each_with_index do |pos,i|
+          %tr
+            %td=i+1
+            %td=image_tag pos.club.logo
+            %td= pos.club.popular_name
+
+
+%style
+  :plain
+    table.standings { 
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 18px;
+    }
+    table.standings tr {
+    }
+    table.standings tr td:nth-child(2) {
+      width: 80px;
+    }
+    table.standings tr td:nth-child(3) {
+      text-align: left;
+    }

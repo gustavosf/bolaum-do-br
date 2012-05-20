@@ -1,0 +1,68 @@
+!!! 5
+%html
+  %head
+    %title Bolão
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+
+  %body
+    #notification-area.span6.offset3
+    - if current_user
+      %div.navbar.navbar-fixed-top
+        %div.navbar-inner
+          %div.container
+            %a.btn.btn-navbar{'data-toggle'=>'collapse', 'data-target'=>'.nav-collapse'}
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            %a.brand{:href=>'/'} Bolão
+            %div.nav-collapse
+              %ul.nav
+                %li.dropdown
+                  %a.dropdown-toggle{:href=>'#', 'data-toggle'=>'dropdown'}
+                    Apostas
+                    %b.caret
+                  %ul.dropdown-menu
+                    %li
+                      %a{:href=>root_url} Minhas Apostas
+                    %li
+                      %a{:href=>root_url+"#selecao"} Seleção
+                    %li
+                      %a{:href=>root_url+"#classificacao"} Classificação
+                %li.dropdown
+                  %a.dropdown-toggle{:href=>'#', 'data-toggle'=>'dropdown'}
+                    Versus
+                    %b.caret
+                  %ul.dropdown-menu
+                    %li= link_to 'Rodada', vs_rodada_url
+                    %li= link_to 'Seleção', vs_selecao_url
+                    %li= link_to 'Classificação', vs_classificacao_url
+
+                %li= link_to 'Regulamento', regulamento_url
+              %ul.nav.pull-right
+                %li.dropdown
+                  %a.dropdown-toggle{:href=>'#', 'data-toggle'=>'dropdown'}
+                    %img{:id=>'user_photo', :src=>current_user.photo}
+                    = current_user.name
+                    %b.caret
+                  %ul.dropdown-menu
+                    %li
+                      %a{:href=>'#'} Meus dados
+                    %li.divider
+                    %li= link_to 'Logout', logout_url
+
+    %div.container
+      - if flash[:error]
+        .alert.alert-error
+          %a.close{'data-dismiss'=>'alert'} ×
+          = flash[:error]
+      - elsif flash[:warning]
+        .alert
+          %a.close{'data-dismiss'=>'alert'} ×
+          = flash[:warning]
+      - elsif flash[:notice]
+        .alert.alert-info
+          %a.close{'data-dismiss'=>'alert'} ×
+          = flash[:notice]
+      = yield

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  max_capaticy: 
+  inauguration: MyString
+  location: MyString
+  name: MyString
+  popular_name: MyString
+
+two:
+  max_capaticy: 
+  inauguration: MyString
+  location: MyString
+  name: MyString
+  popular_name: MyString
