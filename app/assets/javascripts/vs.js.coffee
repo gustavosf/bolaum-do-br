@@ -5,16 +5,17 @@
 @update = (button) ->
   new Notification().info('Atualizando a rodada...')
   $(button).attr 'disabled', 'disabled'
-  $.post('/update', -> $(button).attr 'disabled', false)
+  $.post('/update')
     .success (data) ->
       if data.error
         new Notification().error(data.message)
       else
         new Notification().success(data.message)
         setTimeout 'window.location.reload()', 2500
+      $(button).attr 'disabled', false
     .error ->
       new Notification().error('Um erro ocorreu, tente novamente mais tarde')
-
+      $(button).attr 'disabled', false
 
 @showScore = (game) ->
   bet = JSON.parse $(game).attr('bet')
