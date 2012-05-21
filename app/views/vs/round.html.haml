@@ -2,8 +2,8 @@
   .span5{:style => 'text-align:center'}
     = image_tag @players[0].photo
     
-    %h4.divider Score
-    = @players[0].bets.sum :points
+    %h4.divider Score Total
+    %score= @players[0].bets.sum :points
 
     %h4.divider Apostas
     - points = gm = 0
@@ -29,20 +29,30 @@
             .logo= image_tag game.visitor.logo
           .pontuation{:style => 'float:right;margin-right:10px'}
             = bet[2]
-    %h4.divider PONTUAÇÃO
+    %h4.divider Score da Rodada
     = "#{points} Pontos"
     %br
     = "#{gm} GMs"
   
   .span2.vs
-    vs<br>
+    .vs-head vs
     %button{:onclick => 'update(this)'} Update
-  
+    .pagination{:round => @actual_round}
+      %ul
+        %li
+          %a{:href => "#", :onclick => 'paginate()'} «
+        %li{:class => ('active' if @actual_round < 38)}
+          %a{:href => "#", :onclick => 'paginateTo()'}= @actual_round < 38 ? @actual_round : @actual_round - 1
+        %li{:class => ('active' if @actual_round == 38)}
+          %a{:href => "#", :onclick => 'paginateTo()'}= @actual_round == 38 ? @actual_round : @actual_round + 1
+        %li
+          %a{:href => "#", :onclick => 'paginate()'} »
+ 
   .span5{:style => 'text-align:center'}
     = image_tag @players[1].photo
     
-    %h4.divider Score
-    = @players[1].bets.sum :points
+    %h4.divider Score Total
+    %score= @players[1].bets.sum :points
 
     %h4.divider Apostas
     - points = gm = 0
@@ -68,7 +78,7 @@
             .score= bet[1]
             .team= game.visitor.acronym
             .logo= image_tag game.visitor.logo
-    %h4.divider Pontuação
+    %h4.divider Score da Rodada
     = "#{points} Pontos"
     %br
     = "#{gm} GMs"

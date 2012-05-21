@@ -26,7 +26,7 @@ Bolao::Application.routes.draw do
   end
 
   controller :vs do
-    get 'vs/rodada'        => :round
+    get 'vs/rodada(/:round)' => :round
     get 'vs/selecao'       => :league_team
     get 'vs/classificacao' => :standing
   end
