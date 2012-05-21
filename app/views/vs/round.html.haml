@@ -9,7 +9,7 @@
     - points = gm = 0
     - @round.each do |game|
       - bet = game.bets.find_by_user_id @players[0].id
-      - bet = bet.nil? ? ['-','-',0] : [bet.home_score, bet.visitor_score, bet.points]
+      - bet = (bet.nil? or @actual_round > Game.actual_round) ? ['-','-',0] : [bet.home_score, bet.visitor_score, bet.points]
       - score = game.home_score.nil? ? ['-', '-'] : [game.home_score, game.visitor_score]
       - points += bet[2]
       - gm += bet[2] / 6
@@ -58,7 +58,7 @@
     - points = gm = 0
     - @round.each do |game|
       - bet = game.bets.find_by_user_id @players[1].id
-      - bet = bet.nil? ? ['-','-',0] : [bet.home_score, bet.visitor_score, bet.points]
+      - bet = (bet.nil? or @actual_round > Game.actual_round) ? ['-','-',0] : [bet.home_score, bet.visitor_score, bet.points]
       - score = game.home_score.nil? ? ['-', '-'] : [game.home_score, game.visitor_score]
       - points += bet[2]
       - gm += bet[2] / 6
