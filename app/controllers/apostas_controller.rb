@@ -78,6 +78,7 @@ class ApostasController < ApplicationController
 
   def league_team
     @team = current_user.league_teams
+    @round = Game.next_round
     render 'league_team', :layout => false
   end
 

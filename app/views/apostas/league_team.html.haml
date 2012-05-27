@@ -49,7 +49,7 @@
       %span= player.player + ' (' + player.club.acronym + ')'
   .spacer ^^
 
-- if Game.actual_round <= 2
+- if @round <= 2
   :coffeescript
     $('.player').click (event) ->
       div = $(this)
