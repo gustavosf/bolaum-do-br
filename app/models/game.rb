@@ -9,7 +9,7 @@ class Game < ActiveRecord::Base
 
   def self.actual_round
     date = Game.find(
-      :first,
+      :last,
       :conditions => ["date < ?", Time.now],
       :group => 'date',
       :having => 'count(*) > 1',
