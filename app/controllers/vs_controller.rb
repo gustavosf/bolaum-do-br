@@ -13,11 +13,11 @@ class VsController < ApplicationController
 
   def league_team
     @players = User.all
-    @round = Game.actual_round
+    @round = Game.next_round
   end
 
   def standing
     @players = User.all
-    @round = Game.actual_round
+    @round = Game.next_round
   end
 end
