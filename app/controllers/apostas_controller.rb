@@ -130,7 +130,6 @@ class ApostasController < ApplicationController
       json_ret[:message] = 'Um erro ocorreu, tente novamente mais tarde'
     else
       data = JSON.parse resp.body
-
       round = Game.actual_round
       games = data['lista_de_jogos']['campeonato']['edicao_campeonato']['fases'][0]['jogos']
       games.each do |game| # here, game is an array, not an object (no keys indeed)
@@ -141,7 +140,7 @@ class ApostasController < ApplicationController
 
         g.id            = game['jogo_id']
         g.round         = game['rodada']
-        g.date          = game['data_original'] + ' ' + (game['hora'] or '00h00').gsub('h', ':') + ':00'
+        g.date          = Time.parse(game['data_original'] + ' ' + (game['hora'] or '00h00').gsub('h', ':') + ':00').utc
         g.stadium_id    = game['sede']
         g.home_id       = game['equipe_mandante']
         g.visitor_id    = game['equipe_visitante']
@@ -152,8 +151,8 @@ class ApostasController < ApplicationController
         g.visitor_score = game['placar_visitante']
         g.update_bets if played and changed
         g.save
-        json_ret[:message] = 'As apostas da rodada foram atualizadas!'
       end
+      json_ret[:message] = 'As apostas da rodada foram atualizadas!'
     end
 
     render :json => json_ret

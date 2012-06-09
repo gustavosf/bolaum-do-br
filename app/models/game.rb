@@ -8,14 +8,13 @@ class Game < ActiveRecord::Base
   default_scope :order => 'date ASC'
 
   def self.actual_round
-    date = Game.find(
-      :last,
-      :conditions => ["date < ?", Time.now],
-      :group => 'date',
+    Game.find(
+      :first,
+      :conditions => {:date => Time.now..2.weeks.from_now},
+      :group => 'round,date',
       :having => 'count(*) > 1',
-      :select => 'date',
-      :order => 'date DESC').date
-    Game.find(:first, :conditions => ["date = ?", date]).round
+      :select => 'round',
+      :order => 'round ASC').round
   end
 
   def self.next_round
