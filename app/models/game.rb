@@ -5,16 +5,15 @@ class Game < ActiveRecord::Base
   belongs_to :home, :class_name => 'Club'
   belongs_to :visitor, :class_name => 'Club'
 
-  default_scope :order => 'date ASC'
-
   def self.actual_round
     Game.find(
       :first,
-      :conditions => {:date => Time.now..2.weeks.from_now},
-      :group => 'round,date',
-      :having => 'count(*) > 1',
       :select => 'round',
-      :order => 'round ASC').round
+      :conditions => ["date < ?", Time.now],
+      :group => 'round',
+      :having => 'count(*) > 1',
+      :order => 'round DESC'
+    ).round
   end
 
   def self.next_round
@@ -22,11 +21,11 @@ class Game < ActiveRecord::Base
   end
 
   def self.next_round_games
-    Game.find_all_by_round Game.next_round
+    Game.find(:all, :conditions => {:round => next_round}, :order => :date)
   end
 
   def self.first_game_of_next_round
-    Game.next_round_games.first
+    next_round_games.first
   end
 
   def update_bets
