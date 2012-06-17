@@ -29,7 +29,7 @@ class ApostasController < ApplicationController
       bet.save
       @ret['message'] = "#{bet.game.home.popular_name} #{bet.home_score}-#{bet.visitor_score} #{bet.game.visitor.popular_name} salvo"
     end
-    
+
     respond_to do |format|
       format.json { render :json => @ret }
     end
@@ -117,13 +117,19 @@ class ApostasController < ApplicationController
 
   def update_bets
     resource = 'http://globoesporte.globo.com/dynamo/futebol/campeonato/campeonato-brasileiro/brasileirao2012/classificacao.json'
-    resp = Net::HTTP.get_response(URI.parse(resource))
-
     json_ret = {
       :error => false,
       :message => nil,
       :data => {}
     }
+    resp = nil
+    iterations = 5
+
+    while resp.nil?
+      resp = Net::HTTP.get_response(URI.parse(resource))
+      iterations -= 1
+      break if iterations == 0
+    end
 
     if resp.nil?
       json_ret[:error] = true
