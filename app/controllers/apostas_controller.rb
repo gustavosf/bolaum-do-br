@@ -17,7 +17,7 @@ class ApostasController < ApplicationController
     bet = current_user.bets.find_by_game_id(params[:game_id])
     bet = Bet.new if bet.nil?
 
-    if false
+    if Game.first_game_of_next_round.date < Time.now
       @ret['error'] = true
       @ret['message'] = 'A data limite para aposta neste jogo já passou'
       @ret['score'] = [bet.home_score, bet.visitor_score]
