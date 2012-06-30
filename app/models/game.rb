@@ -13,7 +13,7 @@ class Game < ActiveRecord::Base
       :group => 'round',
       :having => 'count(*) > 1',
       :order => 'round DESC'
-    ).round
+    ).round - 1
   end
 
   def self.next_round
