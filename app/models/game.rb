@@ -24,6 +24,10 @@ class Game < ActiveRecord::Base
     Game.find(:all, :conditions => {:round => next_round}, :order => :date)
   end
 
+  def self.actual_round_games
+    Game.find(:all, :conditions => {:round => actual_round}, :order => :date)
+  end
+
   def self.first_game_of_next_round
     next_round_games.first
   end

@@ -8,6 +8,7 @@ class ApostasController < ApplicationController
 
   def rodada
     @games = Game.next_round_games
+    # @games = Game.actual_round_games
 
     render 'rodada', :layout => false
   end
@@ -18,6 +19,7 @@ class ApostasController < ApplicationController
     bet = Bet.new if bet.nil?
 
     if Game.first_game_of_next_round.date < Time.now
+    # if false
       @ret['error'] = true
       @ret['message'] = 'A data limite para aposta neste jogo já passou'
       @ret['score'] = [bet.home_score, bet.visitor_score]
