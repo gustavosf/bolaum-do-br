@@ -1,0 +1,17 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th{:rowspan => 2} Rodada
+      %th{:colspan => 2} Apostador
+      %th{:rowspan => 2} Prêmio
+    %tr
+      %th Gustavo
+      %th Maurício
+  %tbody
+    - win = [0,0]
+    - @rounds.each do |round|
+      %tr
+        %td= round.round
+        %td= "#{round.points_1}/#{round.gms_1}"
+        %td= "#{round.points_2}/#{round.gms_2}"
+        %td= @prize[round.round].join(", ") unless @prize[round.round].nil? or @prize[round.round].empty?

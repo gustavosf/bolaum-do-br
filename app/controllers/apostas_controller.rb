@@ -6,6 +6,57 @@ class ApostasController < ApplicationController
     @user = current_user
   end
 
+  def overview
+    @rounds = Bet.find(
+      :all, :joins => :game,
+      :select => 'games.round, sum(CASE WHEN user_id=1 THEN points ELSE 0 END) as points_1, sum(CASE WHEN user_id=1 AND points=6 THEN 1 ELSE 0 END) as gms_1, sum(CASE WHEN user_id=2 THEN points ELSE 0 END) as points_2, sum(CASE WHEN user_id=2 AND points=6 THEN 1 ELSE 0 END) as gms_2',
+      :group => 'games.round', :order => 'games.round ASC')
+
+    @graph_rounds = @rounds.map { |round| [Integer(round.round), Integer(round.points_1), Integer(round.points_2)] }
+    @graph_gms = @rounds.map { |round| [Integer(round.round), Integer(round.gms_1), Integer(round.gms_2)] }
+    render 'overview', :layout => false
+  end
+
+  def prizes
+    @rounds = Bet.find(
+      :all, :joins => :game,
+      :select => 'games.round, sum(CASE WHEN user_id=1 THEN points ELSE 0 END) as points_1, sum(CASE WHEN user_id=1 AND points=6 THEN 1 ELSE 0 END) as gms_1, sum(CASE WHEN user_id=2 THEN points ELSE 0 END) as points_2, sum(CASE WHEN user_id=2 AND points=6 THEN 1 ELSE 0 END) as gms_2',
+      :group => 'games.round', :order => 'games.round ASC')
+
+    @prize = Hash.new
+
+    win = [0, 0]
+    gms = [0, 0]
+    @rounds.each do |round|
+      if round.points_1 == round.points_2
+        win = [0, 0]
+      elsif round.points_1 > round.points_2
+        win = [win[0] + 1, 0]
+      else
+        win = [0, win[1] + 1]
+      end
+
+      gms[0] = gms[0] + Integer(round.gms_1)
+      gms[1] = gms[1] + Integer(round.gms_2)
+
+      @prize[round.round] = Array.new unless @prize[round.round]
+      if Integer(round.round) % 3 == 2
+        @prize[round.round].push "Gustavo ganha prêmio pequeno (gm+#{gms[0]-gms[1]})" if gms[0] > gms[1]
+        @prize[round.round].push "Mauricio ganha prêmio pequeno (gm+#{gms[1]-gms[0]})" if gms[1] > gms[0]
+        gms = [0,0]
+      end
+
+      @prize[round.round].push 'Gustavo ganha prêmio pequeno (3v)' if win[0] == 3
+      @prize[round.round].push 'Gustavo ganha prêmio médio (5v)' if win[0] == 5
+      @prize[round.round].push 'Gustavo ganha prêmio grande (7v)' if win[0] == 7
+      @prize[round.round].push 'Mauricio ganha prêmio pequeno (3v)' if win[1] == 3
+      @prize[round.round].push 'Mauricio ganha prêmio médio (5v)' if win[1] == 5
+      @prize[round.round].push 'Mauricio ganha prêmio grande (7v)' if win[1] == 7
+    end
+    render 'prizes', :layout => false
+
+  end
+
   def rodada
     @games = Game.next_round_games
     # @games = Game.actual_round_games
@@ -124,15 +175,7 @@ class ApostasController < ApplicationController
       :message => nil,
       :data => {}
     }
-    resp = nil
-    iterations = 5
-
-    while resp.nil?
-      resp = Net::HTTP.get_response(URI.parse(resource))
-      iterations -= 1
-      break if iterations == 0
-    end
-
+    resp = Net::HTTP.get_response(URI.parse(resource))
     if resp.nil?
       json_ret[:error] = true
       json_ret[:message] = 'Um erro ocorreu, tente novamente mais tarde'

@@ -16,6 +16,9 @@ Bolao::Application.routes.draw do
     post 'league_position' => :league_position
 
     post 'update' => :update_bets
+
+    post 'overview' => :overview
+    post 'prizes' => :prizes
   end
 
   resources :sessions, :only => [:new, :create, :destroy]
