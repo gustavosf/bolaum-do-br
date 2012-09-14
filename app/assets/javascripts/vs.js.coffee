@@ -6,15 +6,17 @@
   new Notification().info('Atualizando a rodada...')
   $(button).attr 'disabled', 'disabled'
   errors = 3
-  $.post('/update')
-    .success (data) ->
+  $.ajax
+    url: '/update'
+    type: 'POST'
+    success: (data) ->
       new Notification().success(data.message)
       setTimeout 'window.location.reload()', 2500
       $(button).attr 'disabled', false
-    .error ->
-      if (errors--)
+    error: ->
+      if --errors
         console.log 'retrying...'
-        $.post(this)
+        $.ajax this
       else
         new Notification().error('Um erro ocorreu, tente novamente mais tarde')
       $(button).attr 'disabled', false
