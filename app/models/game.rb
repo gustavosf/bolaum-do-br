@@ -17,7 +17,7 @@ class Game < ActiveRecord::Base
     if r then
       r.round
     else
-      1
+      0
     end
   end
 
