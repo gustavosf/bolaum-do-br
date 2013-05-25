@@ -6,14 +6,19 @@ class Game < ActiveRecord::Base
   belongs_to :visitor, :class_name => 'Club'
 
   def self.actual_round
-    Game.find(
+    r = Game.find(
       :first,
       :select => 'round',
       :conditions => ["date < ?", Time.now],
       :group => 'round',
       :having => 'count(*) > 1',
       :order => 'round DESC'
-    ).round
+    )
+    if r then
+      r.round
+    else
+      1
+    end
   end
 
   def self.next_round
