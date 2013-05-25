@@ -169,7 +169,7 @@ class ApostasController < ApplicationController
   end
 
   def update_bets
-    resource = 'http://globoesporte.globo.com/dynamo/futebol/campeonato/campeonato-brasileiro/brasileirao2012/classificacao.json'
+    resource = 'http://globoesporte.globo.com/dynamo/futebol/campeonato/campeonato-brasileiro/brasileirao2013/classificacao.json'
     json_ret = {
       :error => false,
       :message => nil,
