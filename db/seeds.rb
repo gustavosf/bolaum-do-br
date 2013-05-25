@@ -13,6 +13,7 @@ require 'net/http'
 resource = 'http://globoesporte.globo.com/dynamo/futebol/campeonato/campeonato-brasileiro/brasileirao2013/classificacao.json'
 
 resp = Net::HTTP.get_response(URI.parse(resource)).body
+resp = Net::HTTP.get_response(URI.parse(resource)).body
 json = JSON.parse resp
 
 User.delete_all
