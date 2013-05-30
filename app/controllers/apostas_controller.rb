@@ -9,7 +9,7 @@ class ApostasController < ApplicationController
   def overview
     @rounds = Bet.find(
       :all, :joins => :game,
-      :select => 'games.round, sum(CASE WHEN user_id=1 THEN points ELSE 0 END) as points_1, sum(CASE WHEN user_id=1 AND points=6 THEN 1 ELSE 0 END) as gms_1, sum(CASE WHEN user_id=2 THEN points ELSE 0 END) as points_2, sum(CASE WHEN user_id=2 AND points=6 THEN 1 ELSE 0 END) as gms_2',
+      :select => 'games.round, sum(CASE WHEN user_id=3 THEN points ELSE 0 END) as points_1, sum(CASE WHEN user_id=3 AND points=6 THEN 1 ELSE 0 END) as gms_1, sum(CASE WHEN user_id=4 THEN points ELSE 0 END) as points_2, sum(CASE WHEN user_id=4 AND points=6 THEN 1 ELSE 0 END) as gms_2',
       :group => 'games.round', :order => 'games.round ASC')
 
     @graph_rounds = @rounds.map { |round| [Integer(round.round), Integer(round.points_1), Integer(round.points_2)] }
@@ -20,7 +20,7 @@ class ApostasController < ApplicationController
   def prizes
     @rounds = Bet.find(
       :all, :joins => :game,
-      :select => 'games.round, sum(CASE WHEN user_id=1 THEN points ELSE 0 END) as points_1, sum(CASE WHEN user_id=1 AND points=6 THEN 1 ELSE 0 END) as gms_1, sum(CASE WHEN user_id=2 THEN points ELSE 0 END) as points_2, sum(CASE WHEN user_id=2 AND points=6 THEN 1 ELSE 0 END) as gms_2',
+      :select => 'games.round, sum(CASE WHEN user_id=3 THEN points ELSE 0 END) as points_1, sum(CASE WHEN user_id=3 AND points=6 THEN 1 ELSE 0 END) as gms_1, sum(CASE WHEN user_id=4 THEN points ELSE 0 END) as points_2, sum(CASE WHEN user_id=4 AND points=6 THEN 1 ELSE 0 END) as gms_2',
       :group => 'games.round', :order => 'games.round ASC')
 
     @prize = Hash.new
