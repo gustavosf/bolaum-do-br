@@ -2,7 +2,7 @@
   .span5{:style => 'text-align:center'}
     = image_tag @players[0].photo
     
-    - if @round <= 2
+    - if @round <= 5
       .alert.alert-error Apostas não são visíveis antes da primeira rodada
     - else
       %h4.divider Primeiro Turno
@@ -29,7 +29,7 @@
   .span5{:style => 'text-align:center'}
     = image_tag @players[1].photo
     
-    - if @round <= 2
+    - if @round <= 5
       .alert.alert-error Apostas não são visíveis antes da primeira rodada
     - else
       %h4.divider Primeiro Turno
