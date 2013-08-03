@@ -34,7 +34,7 @@ class Game < ActiveRecord::Base
   end
 
   def self.first_game_of_next_round
-    next_round_games.first
+    next_round_games.second
   end
 
   def update_bets
