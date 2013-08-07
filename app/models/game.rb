@@ -15,7 +15,7 @@ class Game < ActiveRecord::Base
       :order => 'round DESC'
     )
     if r then
-      r.round - 1
+      r.round
     else
       0
     end
