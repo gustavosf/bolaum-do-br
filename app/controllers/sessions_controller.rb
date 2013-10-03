@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find(params[:user_id])
-    if user && 1 #user.authenticate(params[:password])
+    if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       user.last_access = Time.now
       user.save
