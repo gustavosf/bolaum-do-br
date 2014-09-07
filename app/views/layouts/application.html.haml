@@ -5,6 +5,9 @@
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
+    %script
+      google.load("visualization", "1", {packages:["corechart"]});
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
 
   %body
     #notification-area.span6.offset3
@@ -35,11 +38,11 @@
                     Versus
                     %b.caret
                   %ul.dropdown-menu
-                    %li= link_to 'Rodada', vs_rodada_url
-                    %li= link_to 'Seleção', vs_selecao_url
-                    %li= link_to 'Classificação', vs_classificacao_url
+                    %li= link_to 'Rodada', '/vs/rodada'
+                    %li= link_to 'Seleção', '/vs/selecao'
+                    %li= link_to 'Classificação', '/vs/classificacao'
 
-                %li= link_to 'Regulamento', regulamento_url
+                %li= link_to 'Regulamento', '/regulamento'
               %ul.nav.pull-right
                 %li.dropdown
                   %a.dropdown-toggle{:href=>'#', 'data-toggle'=>'dropdown'}

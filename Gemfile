@@ -5,7 +5,9 @@ gem 'rails', '3.1.0'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
+# gem 'pg'
+# gem 'mysql2'
+gem 'sqlite3'
 
 
 # Gems used only for assets and not required
@@ -35,7 +37,8 @@ group :test do
 end
 
 group :development, :test do
-  gem 'ruby-debug19', :require => 'ruby-debug'
+  #gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'debugger', :require => 'ruby-debug'
 end
 
 gem 'haml'

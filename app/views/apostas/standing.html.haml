@@ -18,7 +18,7 @@
             %div= image_tag pos.club.logo
             = pos.club.popular_name
 
-- if @round <= 2
+- if @round <= 5
   :coffeescript
     $(".sortable").sortable stop: (event, ui) ->
       s = ($(num).attr 'ref' for num in ui.item.parent().children 'li')

@@ -2,16 +2,18 @@
   .span5{:style => 'text-align:center'}
     = image_tag @players[0].photo
     
-    %h4.divider Score
-    = @players[0].bets.sum :points
+    %h4.divider Score Total
+    %score= @players[0].bets.sum :points
 
     %h4.divider Apostas
     - points = gm = 0
     - @round.each do |game|
-      .jogo
-        - bet = game.bets.find_by_user_id @players[0].id
-        - points += bet.nil? ? 0 : bet.points
-        - gm += bet.nil? ? 0 : bet.points / 6
+      - bet = game.bets.find_by_user_id @players[0].id
+      - bet = (bet.nil? or @actual_round > Game.actual_round) ? ['-','-',0] : [bet.home_score, bet.visitor_score, bet.points]
+      - score = game.home_score.nil? ? ['-', '-'] : [game.home_score, game.visitor_score]
+      - points += bet[2]
+      - gm += bet[2] / 6
+      .jogo{:onmouseover => 'showScore(this)',:onmouseout => 'hideScore(this)',:score => score,:bet => bet}
         .info
           = game.date.strftime "%d/%m %H:%M" + ' - '
           = game.stadium ? game.stadium.popular_name : 'A definir'
@@ -19,52 +21,64 @@
           .mandante
             .logo= image_tag game.home.logo
             .team= game.home.acronym
-            .score= bet.nil? ? '-' : bet.home_score
+            .score= bet[0]
           %span x
           .visitante
-            .score= bet.nil? ? '-' : bet.visitor_score
+            .score= bet[1]
             .team= game.visitor.acronym
             .logo= image_tag game.visitor.logo
           .pontuation{:style => 'float:right;margin-right:10px'}
-            = bet.nil? ? '-' : bet.points or '-'
-    %h4.divider PONTUAÇÃO
+            = bet[2]
+    %h4.divider Score da Rodada
     = "#{points} Pontos"
     %br
     = "#{gm} GMs"
   
   .span2.vs
-    vs<br>
+    .vs-head vs
     %button{:onclick => 'update(this)'} Update
-  
+    .pagination{:round => @actual_round}
+      %ul
+        %li
+          %a{:href => "#", :onclick => 'paginate()'} «
+        %li{:class => ('active' if @actual_round < 38)}
+          %a{:href => "#", :onclick => 'paginateTo()'}= @actual_round < 38 ? @actual_round : @actual_round - 1
+        %li{:class => ('active' if @actual_round == 38)}
+          %a{:href => "#", :onclick => 'paginateTo()'}= @actual_round == 38 ? @actual_round : @actual_round + 1
+        %li
+          %a{:href => "#", :onclick => 'paginate()'} »
+ 
   .span5{:style => 'text-align:center'}
     = image_tag @players[1].photo
     
-    %h4.divider Score
-    = @players[1].bets.sum :points
+    %h4.divider Score Total
+    %score= @players[1].bets.sum :points
 
     %h4.divider Apostas
     - points = gm = 0
     - @round.each do |game|
-      .jogo
-        - bet = game.bets.find_by_user_id @players[1].id
-        - points += bet.nil? ? 0 : bet.points
-        - gm += bet.nil? ? 0 : bet.points / 6
+      - bet = game.bets.find_by_user_id @players[1].id
+      - bet = (bet.nil? or @actual_round > Game.actual_round) ? ['-','-',0] : [bet.home_score, bet.visitor_score, bet.points]
+      - score = game.home_score.nil? ? ['-', '-'] : [game.home_score, game.visitor_score]
+      - points += bet[2]
+      - gm += bet[2] / 6
+      .jogo{:onmouseover => 'showScore(this)',:onmouseout => 'hideScore(this)',:score => score,:bet => bet}
         .info
           = game.date.strftime "%d/%m %H:%M" + ' - '
           = game.stadium ? game.stadium.popular_name : 'A definir'
         .pontuation{:style => 'float:left;margin-left:10px'}
-          = bet.nil? ? '-' : bet.points or '-'
+          = bet[2]
         .placar
           .mandante
             .logo= image_tag game.home.logo
             .team= game.home.acronym
-            .score= bet.nil? ? '-' : bet.home_score
+            .score= bet[0]
           %span x
           .visitante
-            .score= bet.nil? ? '-' : bet.visitor_score
+            .score= bet[1]
             .team= game.visitor.acronym
             .logo= image_tag game.visitor.logo
-    %h4.divider Pontuação
+    %h4.divider Score da Rodada
     = "#{points} Pontos"
     %br
     = "#{gm} GMs"

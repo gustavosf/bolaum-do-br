@@ -16,6 +16,9 @@ Bolao::Application.routes.draw do
     post 'league_position' => :league_position
 
     post 'update' => :update_bets
+
+    post 'overview' => :overview
+    post 'prizes' => :prizes
   end
 
   resources :sessions, :only => [:new, :create, :destroy]
@@ -26,7 +29,7 @@ Bolao::Application.routes.draw do
   end
 
   controller :vs do
-    get 'vs/rodada'        => :round
+    get 'vs/rodada(/:round)' => :round
     get 'vs/selecao'       => :league_team
     get 'vs/classificacao' => :standing
   end

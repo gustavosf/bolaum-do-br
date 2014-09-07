@@ -8,5 +8,6 @@
 //= require jquery_ujs
 //= require jquery-ui-1.8.18.custom.min
 //= require twitter/bootstrap
+//= require google.api
 //= require application_more
 //= require_tree .

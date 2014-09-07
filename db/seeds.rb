@@ -10,8 +10,9 @@
 require 'json'
 require 'net/http'
 
-resource = 'http://globoesporte.globo.com/dynamo/futebol/campeonato/campeonato-brasileiro/brasileirao2012/classificacao.json'
+resource = 'http://globoesporte.globo.com/dynamo/futebol/campeonato/campeonato-brasileiro/brasileirao2014/classificacao.json'
 
+resp = Net::HTTP.get_response(URI.parse(resource)).body
 resp = Net::HTTP.get_response(URI.parse(resource)).body
 json = JSON.parse resp
 
@@ -69,7 +70,7 @@ games.each do |game| # here, game is an array, not an object (no keys indeed)
   Game.new do |g|
     g.id            = game['jogo_id']
     g.round         = game['rodada']
-    g.date          = game['data_original']
+    g.date          = Time.parse(game['data_original'] + ' ' + (game['hora'] or '00h00').gsub('h', ':') + ':00').utc
     g.stadium_id    = game['sede']
     g.home_id       = game['equipe_mandante']
     g.visitor_id    = game['equipe_visitante']
