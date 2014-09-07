@@ -10,7 +10,7 @@
 require 'json'
 require 'net/http'
 
-resource = 'http://globoesporte.globo.com/dynamo/futebol/campeonato/campeonato-brasileiro/brasileirao2013/classificacao.json'
+resource = 'http://globoesporte.globo.com/dynamo/futebol/campeonato/campeonato-brasileiro/brasileirao2014/classificacao.json'
 
 resp = Net::HTTP.get_response(URI.parse(resource)).body
 resp = Net::HTTP.get_response(URI.parse(resource)).body
