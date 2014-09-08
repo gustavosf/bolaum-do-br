@@ -19,9 +19,7 @@ test:
   password: 
 
 production:
-  adapter: mysql2
-  encoding: utf8
-  database: bolao
+  adapter: sqlite3
+  database: db/bolao.sqlite3
   pool: 5
-  username: bolao
-  password:
+  timeout: 5000
