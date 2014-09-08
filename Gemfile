@@ -9,17 +9,17 @@ gem 'rails', '3.1.0'
 # gem 'mysql2'
 gem 'sqlite3'
 
+gem 'less-rails'
+gem 'twitter-bootstrap-rails', "~> 2.0.1.0"
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "  ~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
-  gem 'twitter-bootstrap-rails', "~> 2.0.1.0"
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails', "~> 1.0.19"
 gem 'coffee-filter'
 
 # Use unicorn as the web server
