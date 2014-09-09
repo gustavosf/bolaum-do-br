@@ -6,6 +6,10 @@ class SessionsController < ApplicationController
 
   def new
     @users = User.all
+    respond_to do |format|
+      format.html
+      format.json { render :json => @users }
+    end
   end
 
   def create
@@ -19,7 +23,10 @@ class SessionsController < ApplicationController
     else
       flash.now[:error] = "Senha inválida!"
       @users = User.all
-      render "new"
+      respond_to do |format|
+        format.html { render "new" }
+        format.json { render :json => {"erro" => "Senha inválida"} }
+      end
     end
   end
 
