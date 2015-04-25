@@ -19,7 +19,10 @@ class SessionsController < ApplicationController
       user.last_access = Time.now
       user.save
       
-      redirect_to root_url
+      respond_to do |format|
+        format.html { redirect_to root_url }
+        format.json { redirect_to :controller => 'apostas', :action => 'rodada', :format => 'json' }
+      end
     else
       flash.now[:error] = "Senha inválida!"
       @users = User.all

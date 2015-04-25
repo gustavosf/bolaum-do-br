@@ -61,7 +61,27 @@ class ApostasController < ApplicationController
     @games = Game.next_round_games
     # @games = Game.actual_round_games
 
-    render 'rodada', :layout => false
+    respond_to do |format|
+      format.html { render 'rodada', :layout => false }
+      format.json {
+        games = []
+        @games.each do |game|
+          bet = game.bets.find_by_user_id current_user.id
+          games.push({
+            "id"           => game.id.to_s,
+            "home"         => game.home.nick,
+            "home_slug"    => game.home.slug.gsub('-', '_'),
+            "visitor"      => game.visitor.nick,
+            "visitor_slug" => game.visitor.slug.gsub('-', '_'),
+            "stadium"      => game.stadium.popular_name,
+            "date"         => game.date.strftime("%d/%m %H:%M"),
+            "bet_home"     => bet.nil? ? nil : bet.home_score.to_s,
+            "bet_visitor"  => bet.nil? ? nil : bet.visitor_score.to_s
+          })
+        end
+        render :json => { "games" => games }
+      }
+    end
   end
 
   def bet

@@ -4,8 +4,10 @@ Bolao::Application.routes.draw do
 
   controller :apostas do
     get 'regulamento' => :rules
+    get 'index' => :index
 
     post 'rodada' => :rodada
+    get 'rodada' => :rodada
     post 'classificacao' => :standing
     post 'selecao' => :league_team
 
