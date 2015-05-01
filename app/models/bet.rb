@@ -15,4 +15,32 @@ class Bet < ActiveRecord::Base
     save!
   end
 
+  def self.update_round (round)
+    resource = "http://www.footstats.net/partida/getCalendarioCampeonato?campeonato=#{APP_CAMP_ID}&temporada=&rodada=#{round}"
+    resp = Net::HTTP.get_response(URI.parse(resource))
+    if resp.nil?
+      false
+    else
+      data = JSON.parse resp.body
+      games = data['Data']['Partidas']
+      games.each do |game| # here, game is an array, not an object (no keys indeed)
+        g = Game.where(round: round, home_id: game['SiglaMandante']).first or Game.new
+        played  = true if game['PlacarMandante'].present? and game['PlacarVisitante'].present?
+        changed = true if played and (game['PlacarMandante'] != g.home_score or game['PlacarVisitante'] != g.visitor_score)
+        g.round         = round
+        g.date          = Date.strptime(game['DataHora'], '%d/%m/%Y - %H:%M')
+        g.stadium       = game['Estadio']
+        g.home_id       = game['SiglaMandante']
+        g.visitor_id    = game['SiglaVisitante']
+        g.home_score    = game['PlacarMandante']
+        g.visitor_score = game['PlacarVisitante']
+        g.update_bets if played and changed
+        g.save
+      end
+    end
+
+    true
+
+  end
+
 end
