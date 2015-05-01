@@ -27,8 +27,8 @@ module Bolao
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
-    config.time_zone = 'America/Sao_Paulo'
-    #config.active_record.default_timezone = 'America/Sao_Paulo'
+    # config.time_zone = 'America/Sao_Paulo'
+    # config.active_record.default_timezone = 'America/Sao_Paulo'
     #ActiveRecord::Base.time_zone_aware_attributes = false
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
