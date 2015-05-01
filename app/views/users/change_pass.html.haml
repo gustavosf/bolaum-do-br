@@ -1,0 +1,14 @@
+%h1 Altere a sua senha
+%hr
+%form{:method => "POST"}
+  %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}
+  .form-group
+    %label Senha atual
+    %input.form-control{:placeholder => "Senha atual", :type => "password", :name => "current_password"}
+  .form-group
+    %label Nova senha
+    %input.form-control{:placeholder => "Nova senha", :type => "password", :name => "new_password"}
+  .form-group
+    %label Repita a nova senha
+    %input.form-control{:placeholder => "Nova senha", :type => "password", :name => "new_password_confirm"}
+  %button.btn.btn-default{:type => "submit"} Salvar

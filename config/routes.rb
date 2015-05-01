@@ -4,34 +4,27 @@ Bolao::Application.routes.draw do
 
   controller :apostas do
     get 'regulamento' => :rules
-
     post 'rodada' => :rodada
-    post 'classificacao' => :standing
-    post 'selecao' => :league_team
-
     post 'bet' => :bet
-    post 'classificacao_bet' => :standing_bet
-    post 'selecao_bet' => :league_team_bet
-
-    post 'league_position' => :league_position
-
     post 'update' => :update_bets
-
     post 'overview' => :overview
     post 'prizes' => :prizes
   end
 
   resources :sessions, :only => [:new, :create, :destroy]
   controller :sessions do 
-    get 'login'  => :new
-    post 'login' => :create
-    get 'logout' => :destroy
+    get  'login'  => :new
+    post 'login'  => :create
+    get  'logout' => :destroy
+  end
+
+  controller :users do
+    get  'pass' => :change_pass
+    post 'pass' => :save_pass
   end
 
   controller :vs do
     get 'vs/rodada(/:round)' => :round
-    get 'vs/selecao'       => :league_team
-    get 'vs/classificacao' => :standing
   end
 
   # The priority is based upon order of creation:
