@@ -9,7 +9,7 @@ u = User.find_by_email 'gustavosf@gmail.com'
 if u.nil?
   User.new do |u|
     u.email    = 'gustavosf@gmail.com'
-    u.password = 'falkland'
+    u.password = '12345'
     u.name     = 'Gustavo'
     u.photo    = '/photos/gustavo.jpg'
     u.save
