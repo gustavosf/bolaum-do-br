@@ -14,7 +14,6 @@
 ActiveRecord::Schema.define(:version => 20150425131500) do
 
   create_table "bets", :force => true do |t|
-    t.integer  "camp_id"
     t.integer  "game_id"
     t.integer  "user_id"
     t.integer  "home_score"
@@ -25,15 +24,14 @@ ActiveRecord::Schema.define(:version => 20150425131500) do
   end
 
   create_table "games", :force => true do |t|
-    t.integer  "bolao_id"
+    t.integer  "camp_id"
     t.integer  "round"
-    t.datetime "date"
+    t.datetime "date" 
     t.string   "stadium"
-    t.string   "home"
-    t.string   "visitor"
+    t.string   "home_id"
+    t.string   "visitor_id"
     t.integer  "home_score"
     t.integer  "visitor_score"
-    t.integer  "camp_id"
   end
 
   create_table "users", :force => true do |t|
@@ -42,6 +40,12 @@ ActiveRecord::Schema.define(:version => 20150425131500) do
     t.string   "name"
     t.string   "photo"
     t.datetime "last_access"
+  end
+
+  create_table "clubs", :force => true do |t|
+    t.string   "abr"
+    t.string   "name"
+    t.string   "logo"
   end
 
 end

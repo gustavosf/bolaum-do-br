@@ -22,26 +22,8 @@
             %a.brand{:href=>'/'} Bolão
             %div.nav-collapse
               %ul.nav
-                %li.dropdown
-                  %a.dropdown-toggle{:href=>'#', 'data-toggle'=>'dropdown'}
-                    Apostas
-                    %b.caret
-                  %ul.dropdown-menu
-                    %li
-                      %a{:href=>root_url} Minhas Apostas
-                    %li
-                      %a{:href=>root_url+"#selecao"} Seleção
-                    %li
-                      %a{:href=>root_url+"#classificacao"} Classificação
-                %li.dropdown
-                  %a.dropdown-toggle{:href=>'#', 'data-toggle'=>'dropdown'}
-                    Versus
-                    %b.caret
-                  %ul.dropdown-menu
-                    %li= link_to 'Rodada', '/vs/rodada'
-                    %li= link_to 'Seleção', '/vs/selecao'
-                    %li= link_to 'Classificação', '/vs/classificacao'
-
+                %li= link_to 'Apostas', root_url
+                %li= link_to 'Versus', '/vs/rodada'
                 %li= link_to 'Regulamento', '/regulamento'
               %ul.nav.pull-right
                 %li.dropdown
