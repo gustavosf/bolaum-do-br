@@ -169,7 +169,7 @@ class ApostasController < ApplicationController
   end
 
   def update_bets
-    resource = 'http://globoesporte.globo.com/dynamo/futebol/campeonato/campeonato-brasileiro/brasileirao2014/classificacao.json'
+    resource = 'http://www.footstats.net/partida/getCalendarioCampeonato?campeonato=394&temporada=&rodada=' + Game.actual_round
     json_ret = {
       :error => false,
       :message => nil,

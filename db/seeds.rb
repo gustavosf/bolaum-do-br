@@ -10,12 +10,6 @@
 require 'json'
 require 'net/http'
 
-resource = 'http://globoesporte.globo.com/dynamo/futebol/campeonato/campeonato-brasileiro/brasileirao2014/classificacao.json'
-
-resp = Net::HTTP.get_response(URI.parse(resource)).body
-resp = Net::HTTP.get_response(URI.parse(resource)).body
-json = JSON.parse resp
-
 User.delete_all
 User.new do |u|
   u.email = 'gustavosf@gmail.com'
@@ -32,53 +26,30 @@ User.new do |u|
   u.save
 end
 
-# loading all clubs
-Club.delete_all
-clubs = json['lista_de_jogos']['campeonato']['edicao_campeonato']['equipes']
-clubs.each do |club|
-  Club.new do |c|
-    c.id           = club[1]['organizacao_id']
-    c.nick         = club[1]['apelido']
-    c.logo         = club[1]['escudo']
-    c.name         = club[1]['nome']
-    c.popular_name = club[1]['nome_popular']
-    c.acronym      = club[1]['sigla']
-    c.slug         = club[1]['slug']
-    c.save
-  end
-end
+camp_id = 394 # brasileirão 2015
+resource = 'http://www.footstats.net/partida/getCalendarioCampeonato?campeonato=' + camp_id + '&temporada=&rodada='
 
-# loading all stadiuns
-Stadium.delete_all
-stadiuns = json['lista_de_jogos']['campeonato']['edicao_campeonato']['sedes']
-stadiuns.each do |stadium|
-  Stadium.new do |s|
-    s.id           = stadium[0]
-    s.max_capaticy = stadium[1]['capacidade_maxima']
-    s.inauguration = stadium[1]['inauguracao']
-    s.location     = stadium[1]['localizacao']
-    s.name         = stadium[1]['nome']
-    s.popular_name = stadium[1]['nome_popular']
-    s.save
-  end
-end
+(1..38).each do |round|
+  resp = Net::HTTP.get_response(URI.parse(resource + round)).body
+  resp = Net::HTTP.get_response(URI.parse(resource + round)).body
+  json = JSON.parse resp
 
-#loading all games
-Game.delete_all
-games = json['lista_de_jogos']['campeonato']['edicao_campeonato']['fases'][0]['jogos']
-games.each do |game| # here, game is an array, not an object (no keys indeed)
-  Game.new do |g|
-    g.id            = game['jogo_id']
-    g.round         = game['rodada']
-    g.date          = Time.parse(game['data_original'] + ' ' + (game['hora'] or '00h00').gsub('h', ':') + ':00').utc
-    g.stadium_id    = game['sede']
-    g.home_id       = game['equipe_mandante']
-    g.visitor_id    = game['equipe_visitante']
-    g.home_score    = game['placar_mandante']
-    g.visitor_score = game['placar_visitante']
-    g.attendance    = game['public_total']
-    g.income        = game['renda']['total']
-    g.url           = game['url_confronto']
-    g.save
+  #loading all games
+  games = json['lista_de_jogos']['campeonato']['edicao_campeonato']['fases'][0]['jogos']
+  games.each do |game| # here, game is an array, not an object (no keys indeed)
+    Game.new do |g|
+      g.id            = game['jogo_id']
+      g.round         = game['rodada']
+      g.date          = Time.parse(game['data_original'] + ' ' + (game['hora'] or '00h00').gsub('h', ':') + ':00').utc
+      g.stadium_id    = game['sede']
+      g.home_id       = game['equipe_mandante']
+      g.visitor_id    = game['equipe_visitante']
+      g.home_score    = game['placar_mandante']
+      g.visitor_score = game['placar_visitante']
+      g.attendance    = game['public_total']
+      g.income        = game['renda']['total']
+      g.url           = game['url_confronto']
+      g.save
+    end
   end
 end
