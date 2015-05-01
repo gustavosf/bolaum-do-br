@@ -1,9 +1,9 @@
 class Game < ActiveRecord::Base
 
   has_many :bets
-  belongs_to :stadium
-  belongs_to :home, :class_name => 'Club'
-  belongs_to :visitor, :class_name => 'Club'
+  belongs_to :home, class_name: 'Club', primary_key: 'abr'
+  belongs_to :visitor, class_name: 'Club', primary_key: 'abr'
+  default_scope where(camp_id: APP_CAMP_ID)
 
   def self.actual_round
     r = Game.find(

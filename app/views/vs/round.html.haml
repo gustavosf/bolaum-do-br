@@ -16,17 +16,17 @@
       .jogo{:onmouseover => 'showScore(this)',:onmouseout => 'hideScore(this)',:score => score,:bet => bet}
         .info
           = game.date.strftime "%d/%m %H:%M" + ' - '
-          = game.stadium ? game.stadium.popular_name : 'A definir'
+          = game.stadium
         .placar
           .mandante
-            .logo= image_tag game.home.logo
-            .team= game.home.acronym
+            .logo= image_tag "http://footstats.net/logos/#{game.home.logo}"
+            .team= game.home.abr
             .score= bet[0]
           %span x
           .visitante
             .score= bet[1]
-            .team= game.visitor.acronym
-            .logo= image_tag game.visitor.logo
+            .team= game.visitor.abr
+            .logo= image_tag "http://footstats.net/logos/#{game.visitor.logo}"
           .pontuation{:style => 'float:right;margin-right:10px'}
             = bet[2]
     %h4.divider Score da Rodada
@@ -65,19 +65,19 @@
       .jogo{:onmouseover => 'showScore(this)',:onmouseout => 'hideScore(this)',:score => score,:bet => bet}
         .info
           = game.date.strftime "%d/%m %H:%M" + ' - '
-          = game.stadium ? game.stadium.popular_name : 'A definir'
+          = game.stadium
         .pontuation{:style => 'float:left;margin-left:10px'}
           = bet[2]
         .placar
           .mandante
-            .logo= image_tag game.home.logo
-            .team= game.home.acronym
+            .logo= image_tag "http://footstats.net/logos/#{game.home.logo}"
+            .team= game.home.abr
             .score= bet[0]
           %span x
           .visitante
             .score= bet[1]
-            .team= game.visitor.acronym
-            .logo= image_tag game.visitor.logo
+            .team= game.visitor.abr
+            .logo= image_tag "http://footstats.net/logos/#{game.visitor.logo}"
     %h4.divider Score da Rodada
     = "#{points} Pontos"
     %br

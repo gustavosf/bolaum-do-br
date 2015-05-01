@@ -3,12 +3,12 @@
     - bet = game.bets.find_by_user_id current_user.id
     .info
       = game.date.strftime "%d/%m %H:%M" + ' - '
-      = game.stadium ? game.stadium.popular_name : 'A definir'
+      = game.stadium
     .placar
       %div.mandante
-        %img{:src => "#{game.home.logo}"}
+        %img{:src => "http://www.footstats.net/logos/#{game.home.logo}"}
         %input{:maxlength => "1", :type => "text", :value => "#{bet.home_score unless bet.nil?}"}
       %span vs
       %div.visitante
         %input{:maxlength => "1", :type => "text", :value => "#{bet.visitor_score unless bet.nil?}"}
-        %img{:src => "#{game.visitor.logo}"}
+        %img{:src => "http://www.footstats.net/logos/#{game.visitor.logo}"}

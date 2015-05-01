@@ -134,7 +134,7 @@ DEPENDENCIES
   coffee-rails (~> 3.1.0)
   debugger
   haml
-  jquery-rails
+  jquery-rails (~> 1.0.19)
   less-rails
   rails (= 3.1.0)
   sqlite3
