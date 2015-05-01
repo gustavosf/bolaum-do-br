@@ -28,7 +28,7 @@ class Bet < ActiveRecord::Base
         played  = true if game['PlacarMandante'].present? and game['PlacarVisitante'].present?
         changed = true if played and (game['PlacarMandante'] != g.home_score or game['PlacarVisitante'] != g.visitor_score)
         g.round         = round
-        g.date          = Date.strptime(game['DataHora'], '%d/%m/%Y - %H:%M')
+        g.date          = DateTime.strptime(game['DataHora'], '%d/%m/%Y - %H:%M')
         g.stadium       = game['Estadio']
         g.home_id       = game['SiglaMandante']
         g.visitor_id    = game['SiglaVisitante']

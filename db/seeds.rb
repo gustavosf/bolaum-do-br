@@ -71,7 +71,7 @@ Game.destroy_all(camp_id: camp_id)
     Game.new do |g|
       g.camp_id       = camp_id
       g.round         = round
-      g.date          = Date.strptime(game['DataHora'], '%d/%m/%Y - %H:%M')
+      g.date          = DateTime.strptime(game['DataHora'], '%d/%m/%Y - %H:%M')
       g.stadium       = game['Estadio']
       g.home_id       = game['SiglaMandante']
       g.visitor_id    = game['SiglaVisitante']
