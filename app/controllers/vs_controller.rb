@@ -6,7 +6,7 @@ class VsController < ApplicationController
     else
       @actual_round = params[:round].to_i
     end
-    @round   = Game.find_all_by_round @actual_round, :order => 'date'
+    @round   = Game.where(:round => @actual_round).order('date asc')
     @players = User.all
   end
 

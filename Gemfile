@@ -1,25 +1,25 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0'
-
-# Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
+gem 'rails', '4.2.1'
+gem 'bcrypt-ruby'
 
 # gem 'pg'
 # gem 'mysql2'
 gem 'sqlite3'
 
+gem 'therubyracer'
 gem 'less-rails'
-gem 'twitter-bootstrap-rails', "~> 2.0.1.0"
+gem 'sass-rails'
+gem 'twitter-bootstrap-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'coffee-rails', "~> 3.1.0"
+  gem 'coffee-rails'
   gem 'uglifier'
 end
 
-gem 'jquery-rails', "~> 1.0.19"
+gem 'jquery-rails'
 gem 'coffee-filter'
 
 # Use unicorn as the web server
@@ -27,9 +27,6 @@ gem 'coffee-filter'
 
 # Deploy with Capistrano
 # gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :test do
   # Pretty printed test output

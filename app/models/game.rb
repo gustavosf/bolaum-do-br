@@ -3,7 +3,7 @@ class Game < ActiveRecord::Base
   has_many :bets
   belongs_to :home, class_name: 'Club', primary_key: 'abr'
   belongs_to :visitor, class_name: 'Club', primary_key: 'abr'
-  default_scope where(camp_id: APP_CAMP_ID)
+  default_scope { where(camp_id: APP_CAMP_ID) }
 
   def self.actual_round
     r = Game.find(
@@ -13,12 +13,7 @@ class Game < ActiveRecord::Base
       :group => 'round',
       :having => 'count(*) > 1',
       :order => 'round DESC'
-    )
-    if r then
-      r.round
-    else
-      0
-    end
+    ).round rescue 0
   end
 
   def self.next_round

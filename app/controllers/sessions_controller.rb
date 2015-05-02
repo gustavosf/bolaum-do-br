@@ -28,4 +28,10 @@ class SessionsController < ApplicationController
     redirect_to login_url, :notice => "Você foi deslogado"
   end
 
+  private
+
+  def user_params
+    params.require(:user).permit(:email, :name, :photo, :password)
+  end
+
 end
