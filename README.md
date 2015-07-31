@@ -2,7 +2,33 @@
 
 Este é um aplicativo desenvolvido para fins de aprendizado de diversas ferramentas, incluindo Ruby, Rails, REST, Java, Android, entre outros.
 
+## Requisitos
+
+Para executar esta aplicação, é necessário ter o Ruby 1.9.3 instalado na máquina, bem como uma versão do Rails 3. Você pode utilizar o [rvm](https://rvm.io/) para instalar esta versão. Versões mais novas do Ruby (2) ou do Rails (4) não foram testadas, e portanto não são suportadas.
+
 ## Instalação
+
+Siga os passos abaixo para a instalação da aplicação em um ambiente UNIX:
+
+```
+git clone git@github.com:gustavosf/bolaum-do-br.git bolao
+cd bolao 
+bundle install
+rake db:schema:load
+rake db:seed
+rails s
+```
+
+- O comando `bundle install` deve instalar todas as dependências descritas no Gemfile
+- O comando `rake db:schema:load` deve crair o banco de dados em `db/bolao.sqlite3`
+- O comando `rake db:seed` deve popular o banco de dados com usuários e jogos
+
+São criados a princípio dois usuários:
+
+- Gustavo: user_id *1*, senha *12345*
+- Mauricio: user_id *2*, senha *12345*
+
+Você pode se logar acessando [http://localhost:3000](http://localhost:3000)
 
 ## API
 
