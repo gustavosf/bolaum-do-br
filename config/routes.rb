@@ -6,10 +6,14 @@ Bolao::Application.routes.draw do
   namespace :api do
     namespace :v1 do
       controller :bet do
-        get  'round(/:round)'  => :round
-        get  'round'           => :round
-        post 'bet'             => :bet
-        get  'update'          => :update
+        get  'round(/:round)'      => :round
+        get  'round(/:round)/bets' => :round_bets
+        get  'round(/:round)/vs'   => :vs
+        put  'round(/:round)'      => :update
+        post 'bet'                 => :bet
+      end
+      controller :login do
+        post 'token' => :login
       end
     end
   end
