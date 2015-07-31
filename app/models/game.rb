@@ -25,6 +25,10 @@ class Game < ActiveRecord::Base
     Game.find(:all, conditions: {round: round}, :order => :date)
   end
 
+  def self.round_games_with_bets (round)
+    Game.includes(:bets).find(:all, conditions: {round: round}, :order => :date)
+  end
+
   def self.next_round() actual_round + 1 end
   def self.next_round_games() round_games next_round end
   def self.actual_round_games() round_games actual_round end
