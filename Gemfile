@@ -38,7 +38,7 @@ end
 
 group :development, :test do
   #gem 'ruby-debug19', :require => 'ruby-debug'
-  gem 'debugger', :require => 'ruby-debug'
+  #gem 'debugger', :require => 'ruby-debug'
 end
 
 gem 'haml'
