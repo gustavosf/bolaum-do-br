@@ -21,21 +21,18 @@ class Game < ActiveRecord::Base
     end
   end
 
-  def self.next_round
-    actual_round + 1
+  def self.round_games (round)
+    Game.find(:all, conditions: {round: round}, :order => :date)
   end
 
-  def self.next_round_games
-    Game.find(:all, :conditions => {:round => next_round}, :order => :date)
+  def self.round_games_with_bets (round)
+    Game.includes(:bets).find(:all, conditions: {round: round}, :order => :date)
   end
 
-  def self.actual_round_games
-    Game.find(:all, :conditions => {:round => actual_round}, :order => :date)
-  end
-
-  def self.first_game_of_next_round
-    next_round_games.second
-  end
+  def self.next_round() actual_round + 1 end
+  def self.next_round_games() round_games next_round end
+  def self.actual_round_games() round_games actual_round end
+  def self.first_game_of_next_round() next_round_games.second end
 
   def update_bets
     bets.each do |bet|

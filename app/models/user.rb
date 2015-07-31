@@ -15,4 +15,15 @@ class User < ActiveRecord::Base
   has_many :league_teams
 
   default_scope :order => 'id ASC'
+
+  def self.generate_api_key
+    loop do
+      api_key = SecureRandom.base64.tr('+/=', 'Qrt')
+      break api_key unless User.exists?(api_key: api_key)
+    end
+  end
+
+  def as_json(options = {})
+    super(options.merge({ except: [:password_digest] }))
+  end
 end
