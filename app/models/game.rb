@@ -9,7 +9,7 @@ class Game < ActiveRecord::Base
     r = Game.find(
       :first,
       :select => 'round',
-      :conditions => ["date < ?", Time.now],
+      :conditions => ["date < ?", Time.now.utc],
       :group => 'round',
       :having => 'count(*) > 1',
       :order => 'round DESC'
